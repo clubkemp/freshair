@@ -9,11 +9,12 @@ $(document).ready(function (){
     //function to call for hiking data
     
     //TODO: Need to replace this with the value out of our event listener below
-    var searchTerm = "Bellingham"
+    // var searchBtn = "#search-btn"
     //$("#IDOFINPUT")
 
-    $(document).on("click", searchTerm, function (){
-        var term = $(this).response.val() 
+    $("#search-btn").on("click", function (){
+        var term = $("#location-input").val()
+        dist = $("#radius-input").val()
         geoData(term)
     })
     function hikingData (lat, long, dist){
@@ -35,7 +36,7 @@ $(document).ready(function (){
         //calling the geocode a term, so we can get a lat/long
         //var term = "Discovery park"
         //get the gecode using the term\
-        console.log(searchTerm)
+        console.log(`"***************You are looking within ${dist} of: ${searchTerm}*****************`)
         $.get(`https://nominatim.openstreetmap.org/?q=${searchTerm}&addressdetails=1&countrycodes=US&format=json&limit=1`, function(response){
             console.log("------------Geolocation api--------------")  
             console.log(response)
@@ -71,10 +72,6 @@ $(document).ready(function (){
             
 
     }
-    //calling all three functions to see some examples
-    // hikingData();
-    geoData(searchTerm);
-    // yelpData();
     
 })
 
