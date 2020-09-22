@@ -1,9 +1,9 @@
 $(document).ready(function (){
     //setting search params that would be pulled in from the user
     //setting a latitude equal to discovery park
-    var lat = 47.660878
+    var lat = 48.3681
     //setting longitude equal to discovery park
-    var long = -122.416449
+    var long = -124.6250
     //setting a radius search parameter
     var dist = 1
     //function to call for hiking data
@@ -56,10 +56,35 @@ $(document).ready(function (){
             
 
     }
-    //calling all three functions to see some examples
+
+ //function for getting yelp data
+ function weatherAlert(){
+    
+    // var alertWeatherAPI = 'c56b8c5094d7dabc849248635865a867'
+    
+    var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=c56b8c5094d7dabc849248635865a867`
+   
+    $.ajax({
+        method:"GET",
+        url:urlQuery
+    }).then(function (response){
+        console.log("---------------------Weather API---------------------")
+        console.log(response);
+        console.log("---------------------END Weather API---------------------")
+    })
+        
+        
+
+}
+
+
+
+
+    //calling all four functions to see some examples
     hikingData();
     geoData();
     yelpData();
+    weatherAlert();
     
 })
 
