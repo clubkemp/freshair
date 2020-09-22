@@ -1,3 +1,16 @@
 body {
     background: paleturquoise;    
 }
+
+.navbar-top {
+    background-color: salmon;
+}
+
+.advisories-box {
+    background-color: white;
+    text-align: center;
+}
+
+.user-input-container {
+    background-color: rgb(91, 218, 144);
+}
