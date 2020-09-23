@@ -100,7 +100,7 @@ $(document).ready(function (){
     //function for getting weather data
     function weatherData(lat, long){  
         // var alertWeatherAPI = 'c56b8c5094d7dabc849248635865a867'
-        var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=c56b8c5094d7dabc849248635865a867`
+        var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&appid=c56b8c5094d7dabc849248635865a867`
         //TODO: figure out alert OR just use the current weather...
         $.ajax({
             method:"GET",
@@ -109,7 +109,25 @@ $(document).ready(function (){
             console.log("---------------------Weather API---------------------")
             console.log(response);
             //TODO: build the weather object response
+
+            weatherDetails = [
+                {
+                    //TODO: Need to add if statement if there is no alert
+                    // 
+                    // Grabs max high temp for the day
+                    temperature: response.daily[0].temp.max,
+                    // Grabs current weather conditons as a text string
+                    conditions: response.daily[0].weather[0].description,
+                    // Grabs current weather conditions as an icon
+                    currentConditonIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
+
+                }
+                
+
+            ]
+            console.log(weatherDetails);
             console.log("---------------------END Weather API---------------------")
+            
         })
         //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM elements
     }
