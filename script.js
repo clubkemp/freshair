@@ -11,7 +11,18 @@ $(document).ready(function (){
         //fire first function in the link
         geoData(term);
     })
+    //TODO: add jquery click listener to #currentLocation
+        //this listener skips the geodata() function
+        //navigator.geolocation
+        //GeoLocation.getCurrentPostion
+        //parse geolcation return into lat and long variables
+        //fire hikingData
     
+    // TODO: Let's use the above buttons as the starting point for our entire function It'll be the sauce that gets the whole thing going
+
+
+
+
     //function for calling nomination geocoding service
     function geoData (searchTerm) {
         //https://nominatim.org/release-docs/develop/api/Search/
@@ -29,7 +40,7 @@ $(document).ready(function (){
             //fire all the api request using lat long and global dist variable
             hikingData(lat, long, dist)
             yelpData(lat, long, dist)
-            weatherAlert(lat, long)
+            weatherData(lat, long)
             console.log("--------------End Geolocation api ---------------")
 
             })
@@ -77,7 +88,7 @@ $(document).ready(function (){
     }
 
  //function for getting weather data
- function weatherAlert(lat, long){  
+ function weatherData(lat, long){  
     // var alertWeatherAPI = 'c56b8c5094d7dabc849248635865a867'
     var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=c56b8c5094d7dabc849248635865a867`
    //TODO: figure out alert OR just use the current weather...
