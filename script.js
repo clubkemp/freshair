@@ -146,6 +146,20 @@ $(document).ready(function (){
         console.log(hikes)
         //for each element(hike) in array hikes
         hikes.forEach(hike => {
+            //These three vars convert the camel case difficulty to real words
+            var text = hike.difficulty;
+            var result = text.replace( /([A-Z])/g, " $1" );
+            var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+            //Array of our content to loop through to build contentDiv
+            var pContentArray =[
+                `Total Elevation: ${hike.ascent} ft`,
+                `Conditions: ${hike.conditionDetails}`,
+                `Date of condtion: ${hike.conditionDate.slice(0,10)}`,
+                `Difficulty: ${finalResult}`,
+                `Length: ${hike.length}mi`,
+                `Rating: ${hike.stars}`,
+                `More info: <a href='${hike.url}'>hiking Project</a>`
+            ]
             //create the card dive to hold everything
             var cardDiv = $("<div class='card'>")
                 //create the image div
@@ -165,12 +179,20 @@ $(document).ready(function (){
                 //create the div for the content
                 //TODO: THis is where we build out maybe a li or more ps for the various items of info
                 var contentDiv = $("<div class='card-content'>")
-                    //acutally create the p for content
-                    var contentP = $("<p>")
+                    //loop through our p content array to fill 'er up.
+                    pContentArray.forEach(info => {
+                        //acutally create the p for content
+                        var contentP = $("<p>");
+                        //put in the content
+                        contentP.html(info)
+                        //append the p to the contentDiv
+                        contentDiv.append(contentP)
+                    })
+                    
                     //fill the p with the hike content summary
-                    contentP.text(hike.summary)
+                    // contentP.text(hike.summary)
                 //add the p contents to the contend div container
-                contentDiv.append(contentP)
+                // contentDiv.append(contentP)
                 //create a div to hold hte action button
                 var actionDiv = $("<div class='card-action'>")
                     //TODO this will be where we have a save button
