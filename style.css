@@ -1,14 +1,21 @@
+
 body {
     background: paleturquoise;    
 }
 
-.navbar-top {
-    background-color: salmon;
+.nav-wrapper {
+    background-color: rgb(228, 200, 46);
 }
 
-.advisories-box {
-    background-color: white;
-    text-align: center;
+#advisories-btn {
+    margin-top: 12px;
+}
+.brand-logo {
+    margin-top: 8px;
+    margin-left: 5px;
+    padding: 10px;
+    max-width: 160px;
+    max-height: 160px;
 }
 
 .user-input-container {
