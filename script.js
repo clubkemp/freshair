@@ -15,6 +15,8 @@ $(document).ready(function (){
         geoData(term);
     })
     
+    //Dropdown button initializer
+      $('.dropdown-trigger').dropdown();
     
     //TODO: add jquery click listener to #currentLocation
         //this listener skips the geodata() function
