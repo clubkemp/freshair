@@ -12,5 +12,7 @@ body {
 }
 
 .user-input-container {
-    background-color: rgb(91, 218, 144);
+    background-color: rgb(88, 124, 102);
+    margin-top: 0;
+    margin-right:0;
 }
