@@ -15,6 +15,8 @@ $(document).ready(function (){
         geoData(term);
     })
     
+    //Dropdown button initializer
+      $('.dropdown-trigger').dropdown();
     
     //TODO: add jquery click listener to #currentLocation
         //this listener skips the geodata() function
@@ -26,6 +28,7 @@ $(document).ready(function (){
 
 
     //TODO: add listener onto the hike / beer button
+        //hides and unhides the different card buckets
         //checks to see which one is active
         //on change switch which result-container is hidden
 
@@ -67,8 +70,10 @@ $(document).ready(function (){
         $.get(urlQuery, function (response) {
             console.log("----------hiking api-------------")
             //response hiking object
-            console.log(response)
+            var hikes = response.trails
+            console.log(`hikes returned firing buildHike`, hikes)
             console.log("--------------End hiking API --------------")
+            buildHike(hikes);
         })
         //fire hikeBUild function passing in the array of objects as an argument
     }
@@ -109,9 +114,8 @@ $(document).ready(function (){
             console.log("---------------------Weather API---------------------")
             console.log(response);
             //TODO: build the weather object response
-
-            weatherDetails = [
-                {
+            // making this just and object instead of array
+            var weatherDetails = {
                     //TODO: Need to add if statement if there is no alert
                     // 
                     // Grabs max high temp for the day
@@ -121,11 +125,8 @@ $(document).ready(function (){
                     // Grabs current weather conditions as an icon
                     currentConditonIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
 
-                }
-                
-
-            ]
-            console.log(weatherDetails);
+            }
+            console.log(weatherDetails)
             console.log("---------------------END Weather API---------------------")
             
         })
@@ -141,7 +142,53 @@ $(document).ready(function (){
             //div.append(h, p, imgs, etc)
             //result-container-hike.append(div)
 
-    //TODO: buildYhike function
+    function buildHike (hikes) {
+        console.log(hikes)
+        //for each element(hike) in array hikes
+        hikes.forEach(hike => {
+            //create the card dive to hold everything
+            var cardDiv = $("<div class='card'>")
+                //create the image div
+                var cardImgDiv = $("<div class='card-image'>")
+                    //create the img element
+                    var img = $("<img>")
+                    //add the src from our hike loop
+                    img.attr("src", hike.imgMedium)
+                    //TODO: setting the width/height, remove once css in style fixes
+                    img.css({'width' : '300px' , 'height' : '300px'})
+                    //create a div for the title of the hike/card
+                    var titleSpan = $("<span class='card-title'>")
+                    //set the text of the title
+                    titleSpan.text(hike.name)
+                //append the image and the title to the card image div
+                cardImgDiv.append(img, titleSpan)
+                //create the div for the content
+                //TODO: THis is where we build out maybe a li or more ps for the various items of info
+                var contentDiv = $("<div class='card-content'>")
+                    //acutally create the p for content
+                    var contentP = $("<p>")
+                    //fill the p with the hike content summary
+                    contentP.text(hike.summary)
+                //add the p contents to the contend div container
+                contentDiv.append(contentP)
+                //create a div to hold hte action button
+                var actionDiv = $("<div class='card-action'>")
+                    //TODO this will be where we have a save button
+                    var a = $("<a>")
+                    //TODO Filler content, needs to be hooked up to save
+                    a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
+                //add the actions to the actionDiv
+                actionDiv.append(a)
+            //append all card content div containers to the card container
+            cardDiv.append(cardImgDiv, contentDiv, actionDiv )
+            //append the card into the html section in index for result-container
+            $(".hiking-results").append(cardDiv)
+            
+            
+        });
+        
+    }
+            //TODO: buildYhike function
         //Jquery.each (or standard for, forEach) function passing in array of objects
             //create div class = card unchecked hike
             //create h, p, imgs

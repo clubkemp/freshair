@@ -13,17 +13,16 @@
 
 <body>
 
-    <header class="navbar-top">
-        <div class="fresh-air pure-u-12-24">
-            <h1>FRESH AIR</h1>
-        </div>
-        <div class="advisories-box pure-u-12-24">
-            <div class="advisories">
-                <h1>Advisories</h1>
-                <!-- Advisory Text -->
+    <nav class="nav-extended">
+        <div class="row nav-wrapper">
+            <div class="col s5">
+                <img src="images/LogoName.png" class="brand-logo left">
+            </div>
+            <div class="col s7 advisories-box">
+                <a class="waves-effect waves-light btn-small red right" id="advisories-btn">Advisories</a>
             </div>
         </div>
-    </header>
+    </nav>
 
     <br>
 
@@ -39,11 +38,16 @@
             <!-- Current Location -->
             <button type="submit" id="currentLocation"class="pure-button">Use my current location</button>
 
-            <!-- Search Radius -->
-            <form class="pure-form">
-                <input type="text" id = "radius-input" placeholder="Enter search radius" class="radius-search"/>
-            </form>
-            <br>
+            <!-- Radius Dropdown Trigger -->
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Search radius</a>
+
+             <!-- Radius Dropdown Structure -->
+             <ul id='dropdown1' class='dropdown-content'>
+                 <li><a href="#!">2 Miles</a></li>
+                 <li><a href="#!">5 Miles</a></li>
+                 <li><a href="#!">10 Miles</a></li>
+                 <li><a href="#!">15 Miles</a></li>
+             </ul>
 
             <!-- Search Button -->
             <button type="submit" id="search-btn" class="pure-button">Search</button>
