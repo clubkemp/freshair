@@ -1,6 +1,6 @@
 
 body {
-    background: paleturquoise;    
+    background: rgb(95, 158, 62);    
 }
 
 .nav-wrapper {
@@ -8,10 +8,10 @@ body {
 }
 
 #advisories-btn {
-    margin-top: 12px;
+    margin-top: 3px;
 }
 .brand-logo {
-    margin-top: 8px;
+    margin-top: 5px;
     margin-left: 5px;
     padding: 10px;
     max-width: 160px;
