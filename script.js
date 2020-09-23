@@ -1,27 +1,37 @@
 $(document).ready(function (){
     //global distance variable, might just pass this in as an argument to the apis
     var dist = 10
+    //will hold the favoite cards the user clicks on Or maybe just ONE????
+    var favorites = { hikes:[], grub:[] }
     
-    //on click of search button
+        //on click of search button
     $("#search-btn").on("click", function (){
         //get the term the user has searched by
         var term = $("#location-input").val();
         //seting the global variable for api calls of radius
+        //TODO: Need to put in an if statement to only update if the user doesn't enter a search, then we can default to the hard coded 10
         dist = $("#radius-input").val();
         //fire first function in the link
         geoData(term);
     })
+    
+    
     //TODO: add jquery click listener to #currentLocation
         //this listener skips the geodata() function
         //navigator.geolocation
         //GeoLocation.getCurrentPostion
         //parse geolcation return into lat and long variables
-        //fire hikingData
-    
-    // TODO: Let's use the above buttons as the starting point for our entire function It'll be the sauce that gets the whole thing going
+        //set dist equal to the search value, with if check outlined in our button onclick
+        //fire hikingData, yelpData, weatherData pasing the lat/long/dist arguments
 
 
+    //TODO: add listener onto the hike / beer button
+        //checks to see which one is active
+        //on change switch which result-container is hidden
 
+    //TODO: add listener on card to check if it's checked
+        //if clicked change the class form unchecked to checked
+        //pushes that item to array of favorited items in global variables
 
     //function for calling nomination geocoding service
     function geoData (searchTerm) {
@@ -59,7 +69,8 @@ $(document).ready(function (){
             //response hiking object
             console.log(response)
             console.log("--------------End hiking API --------------")
-    })
+        })
+        //fire hikeBUild function passing in the array of objects as an argument
     }
     
     //function for getting yelp data
@@ -80,26 +91,50 @@ $(document).ready(function (){
         }).then(function (response){
             console.log("---------------------Yelp API---------------------")
             console.log(response);
+            //TODO: build and array of yelp objects to pass to the build function
             console.log("---------------------END Yelp API---------------------")
         })
-            
-            
-
+        //fire yelpBuild function passing in the array of objects as the argument
     }
 
- //function for getting weather data
- function weatherData(lat, long){  
-    // var alertWeatherAPI = 'c56b8c5094d7dabc849248635865a867'
-    var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=c56b8c5094d7dabc849248635865a867`
-   //TODO: figure out alert OR just use the current weather...
-    $.ajax({
-        method:"GET",
-        url:urlQuery
-    }).then(function (response){
-        console.log("---------------------Weather API---------------------")
-        console.log(response);
-        console.log("---------------------END Weather API---------------------")
-    })
-}
+    //function for getting weather data
+    function weatherData(lat, long){  
+        // var alertWeatherAPI = 'c56b8c5094d7dabc849248635865a867'
+        var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=c56b8c5094d7dabc849248635865a867`
+        //TODO: figure out alert OR just use the current weather...
+        $.ajax({
+            method:"GET",
+            url:urlQuery
+        }).then(function (response){
+            console.log("---------------------Weather API---------------------")
+            console.log(response);
+            //TODO: build the weather object response
+            console.log("---------------------END Weather API---------------------")
+        })
+        //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM elements
+    }
+
+
+    //TODO: buildYelp function
+        //Jquery.each (or standard for, forEach) function passing in array of objects
+            //create div class = card unchecked
+            //create h, p, imgs
+            //set text, src, alt etc.
+            //div.append(h, p, imgs, etc)
+            //result-container-hike.append(div)
+
+    //TODO: buildYhike function
+        //Jquery.each (or standard for, forEach) function passing in array of objects
+            //create div class = card unchecked hike
+            //create h, p, imgs
+            //set text, src, alt etc.
+            //div.append(h, p, imgs, etc)
+            //result-container-grub.append(div)
+    
+
+    //TODO: updateWather function
+        //takes the weather object and systmatically updates the DOM elements that needs updating
+        //temp, conditions, icon, alerts
+
     
 })
