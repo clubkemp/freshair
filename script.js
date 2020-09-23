@@ -1,47 +1,32 @@
 $(document).ready(function (){
-    //setting search params that would be pulled in from the user
-    //setting a latitude equal to discovery park
-    // var lat = 48.3681
-    // //setting longitude equal to discovery park
-    // var long = -124.6250
-    // //setting a radius search parameter
-    // var dist = 1
-    //function to call for hiking data
+    //global distance variable, might just pass this in as an argument to the apis
+    var dist = 10
     
-    //TODO: Need to replace this with the value out of our event listener below
-    // var searchBtn = "#search-btn"
-    //$("#IDOFINPUT")
-
+    //on click of search button
     $("#search-btn").on("click", function (){
-        var term = $("#location-input").val()
-        dist = $("#radius-input").val()
-        geoData(term)
+        //get the term the user has searched by
+        var term = $("#location-input").val();
+        //seting the global variable for api calls of radius
+        dist = $("#radius-input").val();
+        //fire first function in the link
+        geoData(term);
     })
-    function hikingData (lat, long, dist){
-        //https://www.hikingproject.com/data
-        //api key for hking projet
-        var hikingAPI = '200921607-a699ee88fe046c36c0221ff849e49662'
-        //search by lat/long using a max distance
-        var urlQuery = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${dist}&key=${hikingAPI}`
-        //get urlQuery
-        $.get(urlQuery, function (response) {
-            console.log("----------hiking api-------------")
-            console.log(response)
-            console.log("--------------End hiking API --------------")
-    })
-    }
+    
     //function for calling nomination geocoding service
     function geoData (searchTerm) {
         //https://nominatim.org/release-docs/develop/api/Search/
         //calling the geocode a term, so we can get a lat/long
-        //var term = "Discovery park"
         //get the gecode using the term\
         console.log(`"***************You are looking within ${dist} of: ${searchTerm}*****************`)
         $.get(`https://nominatim.openstreetmap.org/?q=${searchTerm}&addressdetails=1&countrycodes=US&format=json&limit=1`, function(response){
             console.log("------------Geolocation api--------------")  
+            //log the hiking object
             console.log(response)
+            //latitude
             var lat = response[0].lat
+            //longitude
             var long = response[0].lon
+            //fire all the api request using lat long and global dist variable
             hikingData(lat, long, dist)
             yelpData(lat, long, dist)
             weatherAlert(lat, long)
@@ -49,6 +34,23 @@ $(document).ready(function (){
 
             })
     }
+    
+    //function to hit hiking data take in args from geoData
+    function hikingData (lat, long, dist){
+        //https://www.hikingproject.com/data
+        //api key for hking projet
+        var hikingAPI = '200921607-a699ee88fe046c36c0221ff849e49662'
+        //search by lat/long using a max distance global var
+        var urlQuery = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${dist}&key=${hikingAPI}`
+        //get urlQuery
+        $.get(urlQuery, function (response) {
+            console.log("----------hiking api-------------")
+            //response hiking object
+            console.log(response)
+            console.log("--------------End hiking API --------------")
+    })
+    }
+    
     //function for getting yelp data
     function yelpData(lat, long, dist){
         //https://www.yelp.com/developers/documentation/v3/business_search
@@ -74,12 +76,11 @@ $(document).ready(function (){
 
     }
 
- //function for getting yelp data
+ //function for getting weather data
  function weatherAlert(lat, long){  
     // var alertWeatherAPI = 'c56b8c5094d7dabc849248635865a867'
-    
     var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=c56b8c5094d7dabc849248635865a867`
-   
+   //TODO: figure out alert OR just use the current weather...
     $.ajax({
         method:"GET",
         url:urlQuery
@@ -91,6 +92,3 @@ $(document).ready(function (){
 }
     
 })
-
-
-//latitude=${lat}&longitude=${long}&
