@@ -26,6 +26,7 @@ $(document).ready(function (){
 
 
     //TODO: add listener onto the hike / beer button
+        //hides and unhides the different card buckets
         //checks to see which one is active
         //on change switch which result-container is hidden
 
@@ -67,8 +68,10 @@ $(document).ready(function (){
         $.get(urlQuery, function (response) {
             console.log("----------hiking api-------------")
             //response hiking object
-            console.log(response)
+            var hikes = response.trails
+            console.log(`hikes returned firing buildHike`, hikes)
             console.log("--------------End hiking API --------------")
+            buildHike(hikes);
         })
         //fire hikeBUild function passing in the array of objects as an argument
     }
@@ -109,6 +112,7 @@ $(document).ready(function (){
             console.log("---------------------Weather API---------------------")
             console.log(response);
             //TODO: build the weather object response
+            var weather = {temp: response.temp}
             console.log("---------------------END Weather API---------------------")
         })
         //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM elements
@@ -123,7 +127,11 @@ $(document).ready(function (){
             //div.append(h, p, imgs, etc)
             //result-container-hike.append(div)
 
-    //TODO: buildYhike function
+    function buildHike (hikes) {
+        console.log(hikes)
+        
+    }
+            //TODO: buildYhike function
         //Jquery.each (or standard for, forEach) function passing in array of objects
             //create div class = card unchecked hike
             //create h, p, imgs
