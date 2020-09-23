@@ -131,6 +131,38 @@ $(document).ready(function (){
 
     function buildHike (hikes) {
         console.log(hikes)
+        hikes.forEach(hike => {
+            var cardDiv = $("<div class='card'>")
+            
+                var cardImgDiv = $("<div class='card-image'>")
+                
+                    var img = $("<img>")
+                    img.attr("src", hike.imgMedium)
+                    img.css({'width' : '300px' , 'height' : '300px'})
+                    
+                    var titleSpan = $("<span class='card-title'>")
+                    titleSpan.text(hike.name)
+                
+                cardImgDiv.append(img, titleSpan)
+
+                var contentDiv = $("<div class='card-content'>")
+                    
+                    var contentP = $("<p>")
+                    contentP.text(hike.summary)
+
+                contentDiv.append(contentP)
+                
+                var actionDiv = $("<div class='card-action'>")
+                
+                    var a = $("<a>")
+                actionDiv.append(a)
+
+            cardDiv.append(cardImgDiv, contentDiv, actionDiv )
+
+            $(".hiking-results").append(cardDiv)
+            
+            
+        });
         
     }
             //TODO: buildYhike function
