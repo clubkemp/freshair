@@ -113,11 +113,11 @@ $(document).ready(function (){
         }).then(function (response){
             console.log("---------------------Weather API---------------------")
             console.log(response);
-            //TODO: build the weather object response
-            // making this just and object instead of array
+            
+            // Weather object to be dynamically generated
             var weatherDetails = {
-                    //TODO: Need to add if statement if there is no alert
-                    // 
+                    //TODO: add value if alert exists to send user to external NWS site
+                  
                     // Grabs max high temp for the day
                     temperature: response.daily[0].temp.max,
                     // Grabs current weather conditons as a text string
@@ -126,11 +126,18 @@ $(document).ready(function (){
                     currentConditonIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
 
             }
-            console.log(weatherDetails)
+            // If statement for alert. Will alert user if there is an alert, if not no alert will not populate
+
+            if (response.alerts) {
+               weatherDetails.weatherAlert = response.alerts[0].event
+                
+              
+            }
+            
             console.log("---------------------END Weather API---------------------")
             
         })
-        //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM elements
+        //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
     }
 
 

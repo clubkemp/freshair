@@ -6,8 +6,7 @@
     <title>Fresh Air</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,7 +18,8 @@
                 <img src="images/LogoName.png" class="brand-logo left">
             </div>
             <div class="col s7 advisories-box">
-                <a class="waves-effect waves-light btn-small red right" id="advisories-btn">Advisories</a>
+                <!-- <a class="waves-effect waves-light btn-small red right" id="advisories-btn"><i class="tiny material-icons">cloud</i>Advisories</a> -->
+                <a class="btn-floating btn-large waves-effect waves-light red right" id="advisories-btn"><i class="material-icons">filter_drama</i></a>
             </div>
         </div>
     </nav>
@@ -27,30 +27,30 @@
     <br>
 
     <div class="row user-input-container">
-
-        <div class="col s12 search-area">
+     
             <!-- Search Input -->
-            <form class="pure-form">
+            <div class="col 6"></div>
+            <form class="form">
                 <input type="text" id="location-input"placeholder="Enter Location" class="location-search"/>
             </form>
             <br>
 
             <!-- Current Location -->
-            <button type="submit" id="currentLocation"class="pure-button">Use my current location</button>
-
+                   <button class="btn waves-effect waves-light" type="submit" name="action" id="currentLocation">Current Location</button>
             <!-- Radius Dropdown Trigger -->
             <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Search radius</a>
 
              <!-- Radius Dropdown Structure -->
              <ul id='dropdown1' class='dropdown-content'>
-                 <li><a href="#!">2 Miles</a></li>
-                 <li><a href="#!">5 Miles</a></li>
-                 <li><a href="#!">10 Miles</a></li>
-                 <li><a href="#!">15 Miles</a></li>
+                 <li><a href="#!" id="2M">2 Miles</a></li>
+                 <li><a href="#!" id="5M">5 Miles</a></li>
+                 <li><a href="#!" id="10M">10 Miles</a></li>
+                 <li><a href="#!" id="15M">15 Miles</a></li>
              </ul>
 
             <!-- Search Button -->
-            <button type="submit" id="search-btn" class="pure-button">Search</button>
+
+            <button class="btn waves-effect waves-light" type="submit" name="action" id="search-btn">Search</button>
             
             <div class="search-type">
                 <!-- Hike Selector -->
@@ -61,7 +61,7 @@
                     <!-- add class "pure-button-active" to selected target -->
                 </div>
             </div>
-        </div>
+       
 
         <br>
     </div>
@@ -71,16 +71,8 @@
             <div class="row">
                 <div class="col s12 m7">
                   <div class="card">
-                    <div class="card-image">
-                      <img src="images/sample-1.jpg">
-                      <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information.
-                      I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                      <a href="#">This is a link</a>
+
+                     
                     </div>
                   </div>
                 </div>
