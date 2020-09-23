@@ -131,34 +131,44 @@ $(document).ready(function (){
 
     function buildHike (hikes) {
         console.log(hikes)
+        //for each element(hike) in array hikes
         hikes.forEach(hike => {
+            //create the card dive to hold everything
             var cardDiv = $("<div class='card'>")
-            
+                //create the image div
                 var cardImgDiv = $("<div class='card-image'>")
-                
+                    //create the img element
                     var img = $("<img>")
+                    //add the src from our hike loop
                     img.attr("src", hike.imgMedium)
+                    //TODO: setting the width/height, remove once css in style fixes
                     img.css({'width' : '300px' , 'height' : '300px'})
-                    
+                    //create a div for the title of the hike/card
                     var titleSpan = $("<span class='card-title'>")
+                    //set the text of the title
                     titleSpan.text(hike.name)
-                
+                //append the image and the title to the card image div
                 cardImgDiv.append(img, titleSpan)
-
+                //create the div for the content
+                //TODO: THis is where we build out maybe a li or more ps for the various items of info
                 var contentDiv = $("<div class='card-content'>")
-                    
+                    //acutally create the p for content
                     var contentP = $("<p>")
+                    //fill the p with the hike content summary
                     contentP.text(hike.summary)
-
+                //add the p contents to the contend div container
                 contentDiv.append(contentP)
-                
+                //create a div to hold hte action button
                 var actionDiv = $("<div class='card-action'>")
-                
+                    //TODO this will be where we have a save button
                     var a = $("<a>")
+                    //TODO Filler content, needs to be hooked up to save
+                    a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
+                //add the actions to the actionDiv
                 actionDiv.append(a)
-
+            //append all card content div containers to the card container
             cardDiv.append(cardImgDiv, contentDiv, actionDiv )
-
+            //append the card into the html section in index for result-container
             $(".hiking-results").append(cardDiv)
             
             
