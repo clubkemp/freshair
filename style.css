@@ -19,10 +19,9 @@ body {
     max-height: 160px;
 }
 
-
-
-#searchBar{
-    margin-bottom:0px;
-    background-color: darkolivegreen;
-    padding-top: 10px
+.user-input-container {
+    background-color: rgb(91, 218, 144);
+}
+#hike-summary {
+    font-weight: bold;
 }

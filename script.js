@@ -113,11 +113,11 @@ $(document).ready(function (){
         }).then(function (response){
             console.log("---------------------Weather API---------------------")
             console.log(response);
-            //TODO: build the weather object response
-            // making this just and object instead of array
+            
+            // Weather object to be dynamically generated
             var weatherDetails = {
-                    //TODO: Need to add if statement if there is no alert
-                    // 
+                    //TODO: add value if alert exists to send user to external NWS site
+                  
                     // Grabs max high temp for the day
                     temperature: response.daily[0].temp.max,
                     // Grabs current weather conditons as a text string
@@ -126,11 +126,18 @@ $(document).ready(function (){
                     currentConditonIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
 
             }
-            console.log(weatherDetails)
+            // If statement for alert. Will alert user if there is an alert, if not no alert will not populate
+
+            if (response.alerts) {
+               weatherDetails.weatherAlert = response.alerts[0].event
+                
+              
+            }
+            
             console.log("---------------------END Weather API---------------------")
             
         })
-        //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM elements
+        //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
     }
 
 
@@ -146,7 +153,24 @@ $(document).ready(function (){
         console.log(hikes)
         //for each element(hike) in array hikes
         hikes.forEach(hike => {
+            //These three vars convert the camel case difficulty to real words
+            var text = hike.difficulty;
+            var result = text.replace( /([A-Z])/g, " $1" );
+            var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+            //Array of our content to loop through to build contentDiv
+            var pContentArray =[
+                `<span id="hike-summary">${hike.summary}</span>`,
+                `Total Elevation: ${hike.ascent} ft`,
+                `Conditions: ${hike.conditionDetails}`,
+                `Date of condtion: ${hike.conditionDate.slice(0,10)}`,
+                `Difficulty: ${finalResult}`,
+                `Length: ${hike.length}mi`,
+                `Rating: ${hike.stars}`,
+                `More info: <a href='${hike.url}'>hiking Project</a>`
+            ]
             //create the card dive to hold everything
+            //row
+            //col class s-6
             var cardDiv = $("<div class='card'>")
                 //create the image div
                 var cardImgDiv = $("<div class='card-image'>")
@@ -155,7 +179,7 @@ $(document).ready(function (){
                     //add the src from our hike loop
                     img.attr("src", hike.imgMedium)
                     //TODO: setting the width/height, remove once css in style fixes
-                    img.css({'width' : '300px' , 'height' : '300px'})
+                    // img.css({'width' : '300px' , 'height' : '300px'})
                     //create a div for the title of the hike/card
                     var titleSpan = $("<span class='card-title'>")
                     //set the text of the title
@@ -165,12 +189,20 @@ $(document).ready(function (){
                 //create the div for the content
                 //TODO: THis is where we build out maybe a li or more ps for the various items of info
                 var contentDiv = $("<div class='card-content'>")
-                    //acutally create the p for content
-                    var contentP = $("<p>")
+                    //loop through our p content array to fill 'er up.
+                    pContentArray.forEach(info => {
+                        //acutally create the p for content
+                        var contentP = $("<p>");
+                        //put in the content
+                        contentP.html(info)
+                        //append the p to the contentDiv
+                        contentDiv.append(contentP)
+                    })
+                    
                     //fill the p with the hike content summary
-                    contentP.text(hike.summary)
+                    // contentP.text(hike.summary)
                 //add the p contents to the contend div container
-                contentDiv.append(contentP)
+                // contentDiv.append(contentP)
                 //create a div to hold hte action button
                 var actionDiv = $("<div class='card-action'>")
                     //TODO this will be where we have a save button
