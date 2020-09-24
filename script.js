@@ -168,6 +168,8 @@ $(document).ready(function (){
                 `More info: <a href='${hike.url}'>hiking Project</a>`
             ]
             //create the card dive to hold everything
+            //row
+            //col class s-6
             var cardDiv = $("<div class='card'>")
                 //create the image div
                 var cardImgDiv = $("<div class='card-image'>")
@@ -176,7 +178,7 @@ $(document).ready(function (){
                     //add the src from our hike loop
                     img.attr("src", hike.imgMedium)
                     //TODO: setting the width/height, remove once css in style fixes
-                    img.css({'width' : '300px' , 'height' : '300px'})
+                    // img.css({'width' : '300px' , 'height' : '300px'})
                     //create a div for the title of the hike/card
                     var titleSpan = $("<span class='card-title'>")
                     //set the text of the title
