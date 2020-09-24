@@ -154,19 +154,21 @@ $(document).ready(function (){
         //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
     }
 
-
+    //Yelp cards
     function buildYelp (yelp) {
         console.log("Building yelp cards") 
         console.log (yelp) 
         // For loop for yelp data
         yelp.forEach(item => {
             console.log(item)
+            //Adds data for yelp locations.
             var pContentArray =[
                 `Price: ${item.price}`,
                 `Rating: ${item.rating}/5`,
                 `Reviewers: ${item.review_count}`,
                 `Adress: ${item.location.adress1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`,
                 `Phone number: ${item.phone}`,
+                `More info: <a href='${item.url}' target="_blank">Yelp Page</a>`
             ]
             var cardDiv = $("<div class='card'>")
             //create the image div
@@ -235,7 +237,7 @@ $(document).ready(function (){
                 `Difficulty: ${finalResult}`,
                 `Length: ${hike.length}mi`,
                 `Rating: ${hike.stars}`,
-                `More info: <a href='${hike.url}'>hiking Project</a>`
+                `More info: <a href='${hike.url}' target="_blank">Hiking Project</a>`
             ]
             //create the card dive to hold everything
             //row
