@@ -30,6 +30,13 @@ $(document).ready(function (){
 
 
     //TODO: add listener onto the hike / beer button
+    $(".search-type>.btn-small").on("click", function(){
+        console.log($(this).text())
+        if(!$(this).attr("class").includes('btnActive')){
+            $(this).addClass('btnActive').siblings().removeClass('btnActive')
+        }
+       
+    })
         //hides and unhides the different card buckets
         //checks to see which one is active
         //on change switch which result-container is hidden

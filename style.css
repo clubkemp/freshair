@@ -21,3 +21,10 @@ body {
 .user-input-container {
     background-color: rgb(91, 218, 144);
 }
+
+.btnActive{
+    background:rgb(228, 200, 46);
+}
+.btnActive:hover{
+    background:rgb(228, 200, 46);
+}
