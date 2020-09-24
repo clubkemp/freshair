@@ -15,6 +15,12 @@ body {
 #advisories-btn {
     margin-top: 3px;
 }
+
+.modal {
+    max-height: 100% !important ;
+    overflow: visible;
+}
+
 .brand-logo {
     margin-top: 5px;
     margin-left: 5px;
