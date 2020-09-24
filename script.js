@@ -96,6 +96,7 @@ $(document).ready(function (){
         }).then(function (response){
             console.log("---------------------Yelp API---------------------")
             console.log(response);
+            buildYelp (response.businesses);
             //TODO: build and array of yelp objects to pass to the build function
             console.log("---------------------END Yelp API---------------------")
         })
@@ -141,6 +142,61 @@ $(document).ready(function (){
     }
 
 
+    function buildYelp (yelp) {
+        console.log("Building yelp cards") 
+        console.log (yelp) 
+        // For loop for yelp data
+        yelp.forEach(item => {
+            console.log(item)
+            var pContentArray =[
+                `Price: ${item.price}`,
+                `Rating: ${item.rating}/5`,
+                `Reviewers: ${item.review_count}`,
+                `Adress: ${item.location.adress1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`,
+                `Phone number: ${item.phone}`,
+            ]
+            var cardDiv = $("<div class='card'>")
+            //create the image div
+            var cardImgDiv = $("<div class='card-image'>")
+                //create the img element
+                var img = $("<img>")
+                //add the src from our hike loop
+                img.attr("src", item.image_url)
+                //TODO: setting the width/height, remove once css in style fixes
+                // img.css({'width' : '300px' , 'height' : '300px'})
+                //create a div for the title of the hike/card
+                var titleSpan = $("<span class='card-title'>")
+                //set the text of the title
+                titleSpan.text(item.name)
+            //append the image and the title to the card image div
+            cardImgDiv.append(img, titleSpan)
+            //create the div for the content
+            //TODO: THis is where we build out maybe a li or more ps for the various items of info
+            var contentDiv = $("<div class='card-content'>")
+               // loop through our p content array to fill 'er up.
+                pContentArray.forEach(info => {
+                    //acutally create the p for content
+                    var contentP = $("<p>");
+                    //put in the content
+                    contentP.html(info)
+                    //append the p to the contentDiv
+                    contentDiv.append(contentP)
+                })
+                
+            // create a div to hold hte action button
+            var actionDiv = $("<div class='card-action'>")
+                //TODO this will be where we have a save button
+                var a = $("<a>")
+                //TODO Filler content, needs to be hooked up to save
+                a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
+            //add the actions to the actionDiv
+            actionDiv.append(a)
+        //append all card content div containers to the card container
+        cardDiv.append(cardImgDiv, contentDiv, actionDiv )
+        //append the card into the html section in index for result-container
+        $(".beer-results").append(cardDiv)
+        })
+    }
     //TODO: buildYelp function
         //Jquery.each (or standard for, forEach) function passing in array of objects
             //create div class = card unchecked
