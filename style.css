@@ -8,6 +8,10 @@ body {
     margin-bottom: 0px
 }
 
+#wxModal {
+    color: #333;
+}
+
 #advisories-btn {
     margin-top: 3px;
 }
