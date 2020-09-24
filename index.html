@@ -29,38 +29,39 @@
     <div class="row user-input-container">
      
             <!-- Search Input -->
-            <div class="col 6"></div>
-            <form class="form">
-                <input type="text" id="location-input"placeholder="Enter Location" class="location-search"/>
-            </form>
-            <br>
-
-            <!-- Current Location -->
-                   <button class="btn waves-effect waves-light" type="submit" name="action" id="currentLocation">Current Location</button>
-            <!-- Radius Dropdown Trigger -->
-            <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Search radius</a>
-
-             <!-- Radius Dropdown Structure -->
-             <ul id='dropdown1' class='dropdown-content'>
-                 <li><a href="#!" id="2M">2 Miles</a></li>
-                 <li><a href="#!" id="5M">5 Miles</a></li>
-                 <li><a href="#!" id="10M">10 Miles</a></li>
-                 <li><a href="#!" id="15M">15 Miles</a></li>
-             </ul>
-
-            <!-- Search Button -->
-
-            <button class="btn waves-effect waves-light" type="submit" name="action" id="search-btn">Search</button>
-            
-            <div class="search-type">
-                <!-- Hike Selector -->
-                <!-- Beer Selector -->
-                <div class="pure-button-group " role="group" aria-label="...">
-                    <button class="pure-button" id="hikeBtn">Hike</button>
-                    <button class="pure-button" id="beenBtn">Beer</button>
-                    <!-- add class "pure-button-active" to selected target -->
+            <div class="col 6">
+                <div class="row">
+                    <form class="form">
+                        <input type="text" id="location-input"placeholder="Enter Location" class="location-search"/>
+                    </form>
                 </div>
+                <div class="row">
+                    <!-- Current Location -->
+                    <button class="btn waves-effect waves-light" type="submit" name="action" id="currentLocation">Current Location</button>
+                    <!-- Radius Dropdown Trigger -->
+                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Search radius</a>
+        
+                     <!-- Radius Dropdown Structure -->
+                     <ul id='dropdown1' class='dropdown-content'>
+                         <li><a href="#!" id="2M">2 Miles</a></li>
+                         <li><a href="#!" id="5M">5 Miles</a></li>
+                         <li><a href="#!" id="10M">10 Miles</a></li>
+                         <li><a href="#!" id="15M">15 Miles</a></li>
+                     </ul>
+                    <!-- Search Button -->
+                    <button class="btn waves-effect waves-light" type="submit" name="action" id="search-btn">Search</button>
+
+                </div>
+                <div class="row">
+                    <div class="search-type">
+                        <!-- Hike Selector -->
+                        <a class="waves-effect waves-light btn-small">Hike</a>
+                        <!-- Beer Selector -->
+                        <a class="waves-effect waves-light btn-small">Beer</a>
+                    </div>  
+                </div>     
             </div>
+            
        
 
         <br>

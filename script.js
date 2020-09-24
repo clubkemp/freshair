@@ -14,6 +14,8 @@ $(document).ready(function (){
         //fire first function in the link
         geoData(term);
     })
+
+    $
     
     //Dropdown button initializer
       $('.dropdown-trigger').dropdown();
