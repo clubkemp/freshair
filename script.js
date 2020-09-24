@@ -1,13 +1,13 @@
 $(document).ready(function (){
     //global distance variable, might just pass this in as an argument to the apis
     var dist = 10
-    //will hold the favoite cards the user clicks on Or maybe just ONE????
+    //will hold the favorite cards the user clicks on Or maybe just ONE????
     var favorites = { hikes:[], grub:[] }
-    
+    var term = $("#location-input").val();
         //on click of search button
     $("#search-btn").on("click", function (){
         //get the term the user has searched by
-        var term = $("#location-input").val();
+        term = $("#location-input").val();
         //seting the global variable for api calls of radius
         //TODO: Need to put in an if statement to only update if the user doesn't enter a search, then we can default to the hard coded 10
         dist = $("#radius-input").val();
@@ -124,7 +124,7 @@ $(document).ready(function (){
                     // Grabs current weather conditons as a text string
                     conditions: response.daily[0].weather[0].description,
                     // Grabs current weather conditions as an icon
-                    currentConditonIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
+                    currentConditionIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
 
             }
             // If statement for alert. Will alert user if there is an alert, if not no alert will not populate
@@ -136,7 +136,20 @@ $(document).ready(function (){
             }
             
             console.log("---------------------END Weather API---------------------")
-            
+         
+                function weatherAdvisories(){
+                    $('.modal').modal();
+                    $("#modalHeader").text("Weather Advisories - " + term);
+                    var temp = $("#temperature");
+                    var wxCondition = $("#conditions");
+                    var wxIcon = $("#currentConditionIcon");
+                    temp.text("TEMPERATURE: " + response.daily[0].temp.max.toFixed(0) + " F");
+                    wxCondition.text(response.daily[0].weather[0].description.toUpperCase());
+                    wxIcon.attr(`https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`);
+                };
+
+            weatherAdvisories();
+
         })
         //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
     }
@@ -288,6 +301,7 @@ $(document).ready(function (){
     //TODO: updateWather function
         //takes the weather object and systmatically updates the DOM elements that needs updating
         //temp, conditions, icon, alerts
+
 
     
 })
