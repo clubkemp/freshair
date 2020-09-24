@@ -10,7 +10,7 @@ $(document).ready(function (){
         var term = $("#location-input").val();
         //seting the global variable for api calls of radius
         //TODO: Need to put in an if statement to only update if the user doesn't enter a search, then we can default to the hard coded 10
-        dist = $("#radius-input").val();
+        dist = $("#myRange").val();
         //fire first function in the link
         geoData(term);
     })
