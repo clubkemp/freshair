@@ -29,12 +29,23 @@ $(document).ready(function (){
         //fire hikingData, yelpData, weatherData pasing the lat/long/dist arguments
 
 
-    //TODO: add listener onto the hike / beer button
+    //adding listener onto the hike / beer button
     $(".search-type>.btn-small").on("click", function(){
-        console.log($(this).text())
+        //if the class does not include btnActive
         if(!$(this).attr("class").includes('btnActive')){
+            //ad the class btnActive and hit the sibling(other button) and remove btn active
             $(this).addClass('btnActive').siblings().removeClass('btnActive')
+            //if that button also happens to be the hikeBtn
+            if($(this).attr("id") === "hikeBtn"){
+                //then add class hidden to beer card container and remove from hike cards container
+                $("#beer-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+            }else{
+                //if it's not hike button, it must be the beer button so do the opposite
+                $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+            }
         }
+        
+
        
     })
         //hides and unhides the different card buckets

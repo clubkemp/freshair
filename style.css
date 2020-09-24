@@ -21,10 +21,15 @@ body {
 .user-input-container {
     background-color: rgb(91, 218, 144);
 }
-
+/* used to highlight the active button */
 .btnActive{
     background:rgb(228, 200, 46);
 }
+/* used to hide the inactive cards */
+.cardHidden{
+    display: none;
+}
+/* overiding the normal materialized hover on active button */
 .btnActive:hover{
     background:rgb(228, 200, 46);
 }
