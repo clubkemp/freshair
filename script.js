@@ -159,6 +159,7 @@ $(document).ready(function (){
             var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
             //Array of our content to loop through to build contentDiv
             var pContentArray =[
+                `<span id="hike-summary">${hike.summary}</span>`,
                 `Total Elevation: ${hike.ascent} ft`,
                 `Conditions: ${hike.conditionDetails}`,
                 `Date of condtion: ${hike.conditionDate.slice(0,10)}`,
@@ -168,6 +169,8 @@ $(document).ready(function (){
                 `More info: <a href='${hike.url}'>hiking Project</a>`
             ]
             //create the card dive to hold everything
+            //row
+            //col class s-6
             var cardDiv = $("<div class='card'>")
                 //create the image div
                 var cardImgDiv = $("<div class='card-image'>")
@@ -176,7 +179,7 @@ $(document).ready(function (){
                     //add the src from our hike loop
                     img.attr("src", hike.imgMedium)
                     //TODO: setting the width/height, remove once css in style fixes
-                    img.css({'width' : '300px' , 'height' : '300px'})
+                    // img.css({'width' : '300px' , 'height' : '300px'})
                     //create a div for the title of the hike/card
                     var titleSpan = $("<span class='card-title'>")
                     //set the text of the title
