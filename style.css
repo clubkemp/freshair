@@ -5,6 +5,7 @@ body {
 
 .nav-wrapper {
     background-color: rgb(228, 200, 46);
+    margin-bottom: 0px
 }
 
 #advisories-btn {
