@@ -131,6 +131,7 @@ $(document).ready(function (){
 
             if (response.alerts) {
                weatherDetails.weatherAlert = response.alerts[0].event
+               console.log(response.alerts[0].event);
                 
               
             }
@@ -145,7 +146,16 @@ $(document).ready(function (){
                     var wxIcon = $("#currentConditionIcon");
                     temp.text("TEMPERATURE: " + response.daily[0].temp.max.toFixed(0) + " F");
                     wxCondition.text(response.daily[0].weather[0].description.toUpperCase());
-                    wxIcon.attr(`https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`);
+                    wxIcon.attr("src", `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`);
+
+                    if (response.alerts) {
+                        console.log("hello");
+                        var p = response.alerts[0].event
+                        console.log(p);
+                        $("#current-alert").text(p)
+                        
+                        
+                    }
                 };
 
             weatherAdvisories();
