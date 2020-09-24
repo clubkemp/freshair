@@ -35,7 +35,7 @@ $(document).ready(function (){
         //if the class does not include btnActive
         if(!$(this).attr("class").includes('btnActive')){
             //ad the class btnActive and hit the sibling(other button) and remove btn active
-            console.log($(this))
+            console.log($(this).attr("class"))
             $(this).addClass('btnActive').siblings().removeClass('btnActive')
             //if that button also happens to be the hikeBtn
             if($(this).attr("id") === "hikeBtn"){

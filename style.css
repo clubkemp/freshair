@@ -28,7 +28,7 @@ body {
 }
 
 /* used to highlight the active button */
-.btnActive:active{
+.btnActive{
     background:rgb(228, 200, 46);
 }
 /* used to hide the inactive cards */
@@ -36,9 +36,9 @@ body {
     display: none;
 }
 /* overiding the normal materialized hover on active button */
-.btnActive:hover{
+ .btnActive:hover{
     background:rgb(228, 200, 46);
-}
+} 
 
 #hike-summary {
     font-weight: bold;
