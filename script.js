@@ -159,6 +159,7 @@ $(document).ready(function (){
             var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
             //Array of our content to loop through to build contentDiv
             var pContentArray =[
+                `<span id="hike-summary">${hike.summary}</span>`,
                 `Total Elevation: ${hike.ascent} ft`,
                 `Conditions: ${hike.conditionDetails}`,
                 `Date of condtion: ${hike.conditionDate.slice(0,10)}`,
