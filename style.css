@@ -5,6 +5,7 @@ body {
 
 .nav-wrapper {
     background-color: rgb(228, 200, 46);
+    margin-bottom: 0px
 }
 
 #advisories-btn {
@@ -18,6 +19,10 @@ body {
     max-height: 160px;
 }
 
-.user-input-container {
-    background-color: rgb(91, 218, 144);
+
+
+#searchBar{
+    margin-bottom:0px;
+    background-color: darkolivegreen;
+    padding-top: 10px
 }
