@@ -20,10 +20,21 @@
             </div>
             <div class="col s7 advisories-box">
                 <!-- <a class="waves-effect waves-light btn-small red right" id="advisories-btn"><i class="tiny material-icons">cloud</i>Advisories</a> -->
-                <a class="btn-floating btn-large waves-effect waves-light red right" id="advisories-btn"><i
+                <a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#wxModal" id="advisories-btn"><i
                         class="material-icons">filter_drama</i></a>
             </div>
         </div>
+        <div id="wxModal" class="modal">
+            <div class="modal-content">
+              <h4 id="modalHeader"></h4>
+              <p id="temperature"></p>
+              <p id="conditions"></p>
+              <i id="currentConditionIcon"></i>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+            </div>
+          </div>
     </nav>
 
    
@@ -92,15 +103,14 @@
     </div>
 
     <div class="row result-container">
-        <div class="col s12 hiking-results">
+        <div class="col s12">
             <div class="row">
-                <div class="col s12 m7">
-                  <!--  <div class="card">
-                    //TODO: Put the cards here
-                     
-                    </div> -->
-                  </div>
+                <div id="hike-cards" class="col s12 m7 hiking-results">
+                  <!-- Hiking cards dynamically created here -->
                 </div>
+                <div id ="beer-cards" class="col s12 m7 beer-results cardHidden">
+                    <!-- beer cards dynamically created here -->
+                  </div>
             </div>
         </div>
     </div>

@@ -1,13 +1,13 @@
 $(document).ready(function (){
     //global distance variable, might just pass this in as an argument to the apis
     var dist = 10
-    //will hold the favoite cards the user clicks on Or maybe just ONE????
+    //will hold the favorite cards the user clicks on Or maybe just ONE????
     var favorites = { hikes:[], grub:[] }
-    
+    var term = $("#location-input").val();
         //on click of search button
     $("#search-btn").on("click", function (){
         //get the term the user has searched by
-        var term = $("#location-input").val();
+        term = $("#location-input").val();
         //seting the global variable for api calls of radius
         //TODO: Need to put in an if statement to only update if the user doesn't enter a search, then we can default to the hard coded 10
         dist = $("#myRange").val();
@@ -96,6 +96,7 @@ $(document).ready(function (){
         }).then(function (response){
             console.log("---------------------Yelp API---------------------")
             console.log(response);
+            buildYelp (response.businesses);
             //TODO: build and array of yelp objects to pass to the build function
             console.log("---------------------END Yelp API---------------------")
         })
@@ -123,7 +124,7 @@ $(document).ready(function (){
                     // Grabs current weather conditons as a text string
                     conditions: response.daily[0].weather[0].description,
                     // Grabs current weather conditions as an icon
-                    currentConditonIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
+                    currentConditionIcon: `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`
 
             }
             // If statement for alert. Will alert user if there is an alert, if not no alert will not populate
@@ -135,12 +136,80 @@ $(document).ready(function (){
             }
             
             console.log("---------------------END Weather API---------------------")
-            
+         
+                function weatherAdvisories(){
+                    $('.modal').modal();
+                    $("#modalHeader").text("Weather Advisories - " + term);
+                    var temp = $("#temperature");
+                    var wxCondition = $("#conditions");
+                    var wxIcon = $("#currentConditionIcon");
+                    temp.text("TEMPERATURE: " + response.daily[0].temp.max.toFixed(0) + " F");
+                    wxCondition.text(response.daily[0].weather[0].description.toUpperCase());
+                    wxIcon.attr(`https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`);
+                };
+
+            weatherAdvisories();
+
         })
         //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
     }
 
 
+    function buildYelp (yelp) {
+        console.log("Building yelp cards") 
+        console.log (yelp) 
+        // For loop for yelp data
+        yelp.forEach(item => {
+            console.log(item)
+            var pContentArray =[
+                `Price: ${item.price}`,
+                `Rating: ${item.rating}/5`,
+                `Reviewers: ${item.review_count}`,
+                `Adress: ${item.location.adress1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`,
+                `Phone number: ${item.phone}`,
+            ]
+            var cardDiv = $("<div class='card'>")
+            //create the image div
+            var cardImgDiv = $("<div class='card-image'>")
+                //create the img element
+                var img = $("<img>")
+                //add the src from our hike loop
+                img.attr("src", item.image_url)
+                //TODO: setting the width/height, remove once css in style fixes
+                // img.css({'width' : '300px' , 'height' : '300px'})
+                //create a div for the title of the hike/card
+                var titleSpan = $("<span class='card-title'>")
+                //set the text of the title
+                titleSpan.text(item.name)
+            //append the image and the title to the card image div
+            cardImgDiv.append(img, titleSpan)
+            //create the div for the content
+            //TODO: THis is where we build out maybe a li or more ps for the various items of info
+            var contentDiv = $("<div class='card-content'>")
+               // loop through our p content array to fill 'er up.
+                pContentArray.forEach(info => {
+                    //acutally create the p for content
+                    var contentP = $("<p>");
+                    //put in the content
+                    contentP.html(info)
+                    //append the p to the contentDiv
+                    contentDiv.append(contentP)
+                })
+                
+            // create a div to hold hte action button
+            var actionDiv = $("<div class='card-action'>")
+                //TODO this will be where we have a save button
+                var a = $("<a>")
+                //TODO Filler content, needs to be hooked up to save
+                a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
+            //add the actions to the actionDiv
+            actionDiv.append(a)
+        //append all card content div containers to the card container
+        cardDiv.append(cardImgDiv, contentDiv, actionDiv )
+        //append the card into the html section in index for result-container
+        $(".beer-results").append(cardDiv)
+        })
+    }
     //TODO: buildYelp function
         //Jquery.each (or standard for, forEach) function passing in array of objects
             //create div class = card unchecked
@@ -232,6 +301,7 @@ $(document).ready(function (){
     //TODO: updateWather function
         //takes the weather object and systmatically updates the DOM elements that needs updating
         //temp, conditions, icon, alerts
+
 
     
 })
