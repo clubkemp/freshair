@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,52 +20,60 @@
             </div>
             <div class="col s7 advisories-box">
                 <!-- <a class="waves-effect waves-light btn-small red right" id="advisories-btn"><i class="tiny material-icons">cloud</i>Advisories</a> -->
-                <a class="btn-floating btn-large waves-effect waves-light red right" id="advisories-btn"><i class="material-icons">filter_drama</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light red right" id="advisories-btn"><i
+                        class="material-icons">filter_drama</i></a>
             </div>
         </div>
     </nav>
+   
+    <div class="row" id="searchBar">
+        <!-- Search Input -->
+        <div class="col s6 m4">
+            <input type="text" id="location-input" placeholder="Enter Location" class="location-search" />
+        </div>
 
-    <br>
 
-    <div class="row user-input-container">
-     
-            <!-- Search Input -->
-            <div class="col 6">
-                <div class="row">
-                    <form class="form">
-                        <input type="text" id="location-input"placeholder="Enter Location" class="location-search"/>
-                    </form>
-                </div>
-                <div class="row">
-                    <!-- Current Location -->
-                    <button class="btn waves-effect waves-light" type="submit" name="action" id="currentLocation">Current Location</button>
-                    <!-- Radius Dropdown Trigger -->
-                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Search radius</a>
-        
-                     <!-- Radius Dropdown Structure -->
-                     <ul id='dropdown1' class='dropdown-content'>
-                         <li><a href="#!" id="2M">2 Miles</a></li>
-                         <li><a href="#!" id="5M">5 Miles</a></li>
-                         <li><a href="#!" id="10M">10 Miles</a></li>
-                         <li><a href="#!" id="15M">15 Miles</a></li>
-                     </ul>
-                    <!-- Search Button -->
-                    <button class="btn waves-effect waves-light" type="submit" name="action" id="search-btn">Search</button>
+        <!-- Current Location -->
+        <div class="col s6 m2">
+            <button class="btn waves-effect waves-light" type="submit" name="action" id="currentLocation">Current
+                Location</button>
+        </div>
+    
+    
+        <!-- Radius Dropdown Trigger -->
+        <div class="col s8 m4 left">
+            <form action="#">
+                <p class="range-field">
+                  <input type="range" id="test5" min="0" max="50" />
+                </p>
+              </form>
+            <!-- <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Search radius</a> -->
 
-                </div>
-                <div class="row">
-                    <div class="search-type">
-                        <!-- Hike Selector -->
-                        <a id="hikeBtn"class="waves-effect waves-light btn-small btnActive">Hike</a>
-                        <!-- Beer Selector -->
-                        <a id ="beerBtn" class="waves-effect waves-light btn-small">Beer</a>
-                    </div>  
-                </div>     
-            </div>
-            
-       
+            <!-- Radius Dropdown Structure -->
+            <!-- <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!" id="2M">2 Miles</a></li>
+                <li><a href="#!" id="5M">5 Miles</a></li>
+                <li><a href="#!" id="10M">10 Miles</a></li>
+                <li><a href="#!" id="15M">15 Miles</a></li>
+            </ul> -->
+        </div>
 
-        <br>
+        <!-- Search Button -->
+        <div class="col s2 m2 left">
+            <button class="btn waves-effect waves-light" type="submit" name="action" id="search-btn">Search</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s6 center">
+            <!-- <div class="search-type"> -->
+                <!-- Hike Selector -->
+                <!-- <div class="button-group center" role="group" aria-label="..."> -->
+                <button class="btn waves-effect waves-dark btn-small btnActive" type="submit" name="action" id="hikeBtn">
+                    Hike</button>
+                <button class="btn waves-effect waves-dark btn-small" type="submit" name="action" id="beerBtn">
+                    Beer</button>
+        </div>
     </div>
 
     <div class="row result-container">
@@ -78,13 +87,12 @@
                   </div>
             </div>
         </div>
-        <!-- Dynamically generate cards -->
     </div>
-
+    <!-- Dynamically generate cards -->
     <div class="navbar-bottom">
         <!-- Maybe -->
     </div>
-    
+
     <!-- Throw this link in when the time comes -->
     <!-- <a href="https://map.snapchat.com/"<span id="lat">@47.662183</span>,-122.417472,14.19z">check the state of Snaps</a> -->
     
@@ -94,4 +102,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

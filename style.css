@@ -5,6 +5,7 @@ body {
 
 .nav-wrapper {
     background-color: rgb(228, 200, 46);
+    margin-bottom: 0px
 }
 
 #advisories-btn {
@@ -21,8 +22,9 @@ body {
 .user-input-container {
     background-color: rgb(91, 218, 144);
 }
+
 /* used to highlight the active button */
-.btnActive{
+.btnActive:active{
     background:rgb(228, 200, 46);
 }
 /* used to hide the inactive cards */
@@ -33,3 +35,8 @@ body {
 .btnActive:hover{
     background:rgb(228, 200, 46);
 }
+
+#hike-summary {
+    font-weight: bold;
+}
+
