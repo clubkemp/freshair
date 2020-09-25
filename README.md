@@ -15,5 +15,5 @@ We are using the street map api to obtain the geo location of the user and then 
 ## User Journey:
 Uses will download this app and immediately use the geo locate in their phone to identify their locations or the users can manually input the location of their choice. Once the location is loaded, it will show stack of cards of near by parks, hiking trails and bar/ restaurants for user to pick. 
 
-![Mobile](images/Fresh Air.gif)
+![Mobile](images/FreshAir.gif)
 
