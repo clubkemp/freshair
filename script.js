@@ -16,8 +16,6 @@ $(document).ready(function (){
         //fire first function in the link
         geoData(term);
     })
-
-    $
     
     //Dropdown button initializer
       $('.dropdown-trigger').dropdown();
@@ -36,8 +34,12 @@ $(document).ready(function (){
         console.log("clicked!")
         var id = ($(this).attr("id"))
         if(id === "hikeBtn" && cardStatus.hike === 0 ){
+            cardStatus.hike = 1
+            cardStatus.beer = 0
             $("#beer-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
         }else if (id === "beerBtn" && cardStatus.beer === 0){
+            cardStatus.beer = 1
+            cardStatus.hike = 0
             $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
         }else{
             console.log("already Active")
@@ -199,6 +201,7 @@ $(document).ready(function (){
 
     //Yelp cards
     function buildYelp (yelp) {
+        $(".beer-results").empty()
         console.log("Building yelp cards") 
         console.log (yelp) 
         // For loop for yelp data
@@ -264,6 +267,7 @@ $(document).ready(function (){
             //result-container-hike.append(div)
 
     function buildHike (hikes) {
+        $(".hiking-results").empty();
         console.log(hikes)
         //for each element(hike) in array hikes
         hikes.forEach(hike => {
