@@ -8,6 +8,9 @@ $(document).ready(function (){
     //sets term ot the search criteria
     var term = $("#location-input").val();
         //on click of search button
+    //TODO: declare global lat long vars
+    // var lat
+    // var long
     $("#search-btn").on("click", function (){
         $(".beer-results").empty()
         $(".hiking-results").empty()
@@ -17,6 +20,11 @@ $(document).ready(function (){
         //TODO: Need to put in an if statement to only update if the user doesn't enter a search, then we can default to the hard coded 10
         dist = $("#myRange").val();
         //fire first function in the link
+        // if(lat &&){
+        //     hikingData(lat, long, dist)
+        //     yelpData(lat, long, dist)
+        //     weatherData(lat, long)
+        // }
         geoData(term);
     })
 
@@ -26,6 +34,10 @@ $(document).ready(function (){
     })
     
     //TODO: add jquery click listener to #currentLocation
+        // code code code
+        // lat = code that gives lat
+        // long = 
+
         //this listener skips the geodata() function
         //navigator.geolocation
         //GeoLocation.getCurrentPostion
