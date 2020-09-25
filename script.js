@@ -3,6 +3,8 @@ $(document).ready(function (){
     var dist = 10
     //will hold the favorite cards the user clicks on Or maybe just ONE????
     var favorites = { hikes:[], grub:[] }
+    var cardStatus = {hike: 1, beer: 0}
+    //sets term ot the search criteria
     var term = $("#location-input").val();
         //on click of search button
     $("#search-btn").on("click", function (){
@@ -30,22 +32,31 @@ $(document).ready(function (){
 
 
     //adding listener onto the hike / beer button
-    $(".btn-small").on("click", function(){
+    $(".tab-btn").on("click", function(){
         console.log("clicked!")
-        //if the class does not include btnActive
-        if(!$(this).attr("class").includes('btnActive')){
-            //ad the class btnActive and hit the sibling(other button) and remove btn active
-            console.log($(this).attr("class"))
-            $(this).addClass('btnActive').siblings().removeClass('btnActive')
-            //if that button also happens to be the hikeBtn
-            if($(this).attr("id") === "hikeBtn"){
-                //then add class hidden to beer card container and remove from hike cards container
-                $("#beer-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
-            }else{
-                //if it's not hike button, it must be the beer button so do the opposite
-                $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
-            }
+        var id = ($(this).attr("id"))
+        if(id === "hikeBtn" && cardStatus.hike === 0 ){
+            $("#beer-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+        }else if (id === "beerBtn" && cardStatus.beer === 0){
+            $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+        }else{
+            console.log("already Active")
         }
+
+        // //if the class does not include btnActive
+        // if(!$(this).attr("class").includes('btnActive')){
+        //     //ad the class btnActive and hit the sibling(other button) and remove btn active
+        //     console.log($(this).attr("class"))
+        //     $(this).addClass('btnActive').siblings().removeClass('btnActive')
+        //     //if that button also happens to be the hikeBtn
+        //     if($(this).attr("id") === "hikeBtn"){
+        //         //then add class hidden to beer card container and remove from hike cards container
+        //         
+        //     }else{
+        //         //if it's not hike button, it must be the beer button so do the opposite
+        //         $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+        //     }
+        // }
         
 
        
@@ -153,6 +164,7 @@ $(document).ready(function (){
 
             if (response.alerts) {
                weatherDetails.weatherAlert = response.alerts[0].event
+               console.log(response.alerts[0].event);
                 
               
             }
@@ -167,7 +179,16 @@ $(document).ready(function (){
                     var wxIcon = $("#currentConditionIcon");
                     temp.text("TEMPERATURE: " + response.daily[0].temp.max.toFixed(0) + " F");
                     wxCondition.text(response.daily[0].weather[0].description.toUpperCase());
-                    wxIcon.attr(`https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`);
+                    wxIcon.attr("src", `https://openweathermap.org/img/wn/${response.daily[0].weather[0].icon}@2x.png`);
+
+                    if (response.alerts) {
+                        console.log("hello");
+                        var p = response.alerts[0].event
+                        console.log(p);
+                        $("#current-alert").text(p)
+                        
+                        
+                    }
                 };
 
             weatherAdvisories();
@@ -176,19 +197,21 @@ $(document).ready(function (){
         //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
     }
 
-
+    //Yelp cards
     function buildYelp (yelp) {
         console.log("Building yelp cards") 
         console.log (yelp) 
         // For loop for yelp data
         yelp.forEach(item => {
             console.log(item)
+            //Adds data for yelp locations.
             var pContentArray =[
                 `Price: ${item.price}`,
                 `Rating: ${item.rating}/5`,
                 `Reviewers: ${item.review_count}`,
                 `Adress: ${item.location.adress1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`,
                 `Phone number: ${item.phone}`,
+                `More info: <a href='${item.url}' target="_blank">Yelp Page</a>`
             ]
             var cardDiv = $("<div class='card'>")
             //create the image div
@@ -257,7 +280,7 @@ $(document).ready(function (){
                 `Difficulty: ${finalResult}`,
                 `Length: ${hike.length}mi`,
                 `Rating: ${hike.stars}`,
-                `More info: <a href='${hike.url}'>hiking Project</a>`
+                `More info: <a href='${hike.url}' target="_blank">Hiking Project</a>`
             ]
             //create the card dive to hold everything
             //row

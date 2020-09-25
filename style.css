@@ -1,72 +1,120 @@
 
+/* Main body color */
 body {
-    background: rgb(95, 158, 62);    
+    background: rgba(8, 167, 3, 0.568);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;    
 }
 
-.nav-wrapper {
-    background-color: rgb(228, 200, 46);
-    margin-bottom: 0px
-}
+main {
+    flex: 1 0 auto;
+  }
 
-#wxModal {
-    color: #333;
-}
-
-#advisories-btn {
-    margin-top: 3px;
-}
+/* logo sizing */
 .brand-logo {
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: 5px;
     padding: 10px;
     max-width: 160px;
     max-height: 160px;
 }
 
-.slidecontainer {
-    width: 100%; 
-    height:10px;
-  } 
-  
-  .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 5px;
-    border-radius: 5px;  
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-  
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 5px;
-    border-radius: 50%; 
-    background: #fbffe9;
-    cursor: pointer;
-  }
-.user-input-container {
-    background-color: rgb(91, 218, 144);
+/* navbar styling */
+.nav-wrapper {
+    background: rgb(228, 201, 46) !important;
+    margin-bottom: 0px;
+    padding-bottom: 5px;
 }
 
-/* used to highlight the active button */
-.btnActive{
-    background:rgb(228, 200, 46);
+/* modal styling */
+#wxModal {
+    color: #333;
+    background-color: rgba(192, 201, 201, 0.877);
 }
+
+#advisories-btn {
+    margin-top: 3px;
+}
+
+.modal {
+    max-height: 100% !important ;
+    overflow: visible;
+}
+
+/* main search container styling */
+#searchBar{
+    margin-top:0;
+    margin-bottom: 0;
+    padding: 1rem;
+    background-color: rgba(240, 165, 27, 0.959);
+}
+
 /* used to hide the inactive cards */
 .cardHidden{
     display: none;
 }
-/* overiding the normal materialized hover on active button */
- .btnActive:hover{
-    background:rgb(228, 200, 46);
-} 
 
-#hike-summary {
+#location-input {
+    color: white;
+    font-size: 20px;
     font-weight: bold;
 }
 
+/* Slider styling */
+/* Still need to work out how to style slider to overwrite materialize */
+
+/* generic btn styling */
+.btn {
+    border-radius: 20px;
+    background-color: rgb(243, 80, 39);
+    font-weight: bold;
+}
+
+/* HIKING/BEER Tab styling  */
+.tab-container {
+    padding: 20px;
+    background-color: rgba(69, 186, 221, 0.979);
+    border-radius: 0px 0px 55px 0px;
+    box-shadow: 0px 0px 0 rgba(0, 0, 0, 0.301), 0 3px 10px 0 rgba(0, 0, 0, 0.274);
+}
+
+.tab-btn {
+    padding-left: 30%;
+    padding-right: 30%;
+    background-color: rgba(20, 98, 214, 0.438);
+}
+
+/* Placeholder font styling  */
+::placeholder {
+    font-size: 14px;
+}
+
+/* Card styling */
+#hike-summary {
+    font-weight: bold;
+}
+.card {
+    background-color: rgba(224, 250, 231, 0.822);
+}
+
+.beer-results {
+    max-width: 600px;
+} 
+
+.hiking-results {
+    max-width: 600px;
+}
+
+
+/* Footer styling */
+.page-footer {
+    background-color: rgb(211, 177, 24);
+    margin-bottom: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.74), 20px 20px 50px 0 rgba(0, 0, 0, 0.637);  
+}
+
+#footer-logo {
+    max-width: 200px;
+    margin-top: 5px;
+}
