@@ -13,5 +13,5 @@ The inconvenience of having to go to multiple sources to obtain the hiking infor
 We are using the street map api to obtaion the geo location of the user and then log the geo location to both hiking poject and yelp site to collect the near by hikes and beer spots information.  
 
 ## User Journey:
-Uses will download this app and immediately use the geo locate in their phone to identify their locations or the users can manually input the location of their choice. Once the lcoation is loaded, it will show stack of cards of near by parks, hiking trails and bar/ restaurants for user to select.
+Uses will download this app and immediately use the geo locate in their phone to identify their locations or the users can manually input the location of their choice. Once the lcoation is loaded, it will show stack of cards of near by parks, hiking trails and bar/ restaurants for user to pick. 
 
