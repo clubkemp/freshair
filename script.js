@@ -97,8 +97,9 @@ $(document).ready(function (){
     //function to hit hiking data take in args from geoData
     function hikingData (lat, long, dist){
         //https://www.hikingproject.com/data
-        //api key for hking projet
+        //api key for hiking project
         var hikingAPI = '200921607-a699ee88fe046c36c0221ff849e49662'
+        // HIKING API KEY = '200922231-f42dcac72820a60fd70fc2690b0d09ea' //
         //search by lat/long using a max distance global var
         var urlQuery = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${dist}&key=${hikingAPI}`
         //get urlQuery
@@ -124,6 +125,7 @@ $(document).ready(function (){
             meters = 40000
         }
         var yelpAPI = 'qKOC1kAZU2-2x7naO5Epsn00-qErSCTjFvWpQ5ShX-JZ_iyUxKhsS7uGB7A7Tj2dws4OzHLGIJcc8xOScqtHQBVV_5-wtpbgshzys3tHfqKMfXawn014lTTg-9ehXnYx'
+        // YELP API KEY 'ckxrfqlwmXAxoITQyE0VFgrAVTojMarO9jkT-buj7Kufq3kATlZ-cd18uBYQ7AtM8HNqwLLxPs-iSo79Oaj5kZttTSu0YTCllDHsmCzI-ODlaAMwIfSE5ohCBypuX3Yx' //
         //using the cors anywhere hack to get around cros, searching using lat long
         var urlQuery = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=brewery&latitude=${lat}&longitude=${long}&radius=${meters}&sort_by=rating`
         //calling this is a little different since it needs an authorization header
@@ -145,6 +147,7 @@ $(document).ready(function (){
     //function for getting weather data
     function weatherData(lat, long){  
         var weatherAPI = 'c56b8c5094d7dabc849248635865a867'
+        // WEATHER API KEY = '17a9e463090b33048b8d0e143b013660' //
         var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&appid=${weatherAPI}`
         $.ajax({
             method:"GET",
