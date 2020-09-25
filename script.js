@@ -3,11 +3,14 @@ $(document).ready(function (){
     var dist = 10
     //will hold the favorite cards the user clicks on Or maybe just ONE????
     var favorites = { hikes:[], grub:[] }
+    //used to toggle cards on and off
     var cardStatus = {hike: 1, beer: 0}
     //sets term ot the search criteria
     var term = $("#location-input").val();
         //on click of search button
     $("#search-btn").on("click", function (){
+        $(".beer-results").empty()
+        $(".hiking-results").empty()
         //get the term the user has searched by
         term = $("#location-input").val();
         //seting the global variable for api calls of radius
@@ -17,10 +20,10 @@ $(document).ready(function (){
         geoData(term);
     })
 
-    $
-    
-    //Dropdown button initializer
-      $('.dropdown-trigger').dropdown();
+    //listener that updates the search label on slider change
+    $("#myRange").on("change", function(){
+        $("#range-label").text($(this).val());
+    })
     
     //TODO: add jquery click listener to #currentLocation
         //this listener skips the geodata() function
@@ -33,37 +36,24 @@ $(document).ready(function (){
 
     //adding listener onto the hike / beer button
     $(".tab-btn").on("click", function(){
-        console.log("clicked!")
+        //id of the clicked button
         var id = ($(this).attr("id"))
+        //check if the click is hike button, and if it's inactive
         if(id === "hikeBtn" && cardStatus.hike === 0 ){
+            //switch the status object
+            cardStatus.hike = 1
+            cardStatus.beer = 0
+            //switch the card hidden class on the card divs
             $("#beer-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
-        }else if (id === "beerBtn" && cardStatus.beer === 0){
-            $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
-        }else{
-            console.log("already Active")
         }
-
-        // //if the class does not include btnActive
-        // if(!$(this).attr("class").includes('btnActive')){
-        //     //ad the class btnActive and hit the sibling(other button) and remove btn active
-        //     console.log($(this).attr("class"))
-        //     $(this).addClass('btnActive').siblings().removeClass('btnActive')
-        //     //if that button also happens to be the hikeBtn
-        //     if($(this).attr("id") === "hikeBtn"){
-        //         //then add class hidden to beer card container and remove from hike cards container
-        //         
-        //     }else{
-        //         //if it's not hike button, it must be the beer button so do the opposite
-        //         $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
-        //     }
-        // }
-        
-
+        //otherwise check to see if the click was on beer button, and if that one is 
+        else if (id === "beerBtn" && cardStatus.beer === 0){
+            cardStatus.beer = 1
+            cardStatus.hike = 0
+            $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+        }
        
     })
-        //hides and unhides the different card buckets
-        //checks to see which one is active
-        //on change switch which result-container is hidden
 
     //TODO: add listener on card to check if it's checked
         //if clicked change the class form unchecked to checked
@@ -115,10 +105,15 @@ $(document).ready(function (){
     function yelpData(lat, long, dist){
         //https://www.yelp.com/developers/documentation/v3/business_search
         //api key
+        //converting distance into meters for use in the api call
+        var meters = Math.floor(dist *1609.344)
+        //maxes out at 40000meters so if it's greater than that just set to max
+        if(meters > 40000 ){
+            meters = 40000
+        }
         var yelpAPI = 'qKOC1kAZU2-2x7naO5Epsn00-qErSCTjFvWpQ5ShX-JZ_iyUxKhsS7uGB7A7Tj2dws4OzHLGIJcc8xOScqtHQBVV_5-wtpbgshzys3tHfqKMfXawn014lTTg-9ehXnYx'
         //using the cors anywhere hack to get around cros, searching using lat long
-        //TODO: need to dial in the radius query
-        var urlQuery = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=beer&latitude=${lat}&longitude=${long}`
+        var urlQuery = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=brewery&latitude=${lat}&longitude=${long}&radius=${meters}&sort_by=rating`
         //calling this is a little different since it needs an authorization header
         $.ajax({
             method:"GET",
@@ -130,7 +125,6 @@ $(document).ready(function (){
             console.log("---------------------Yelp API---------------------")
             console.log(response);
             buildYelp (response.businesses);
-            //TODO: build and array of yelp objects to pass to the build function
             console.log("---------------------END Yelp API---------------------")
         })
         //fire yelpBuild function passing in the array of objects as the argument
@@ -138,9 +132,8 @@ $(document).ready(function (){
 
     //function for getting weather data
     function weatherData(lat, long){  
-        // var alertWeatherAPI = 'c56b8c5094d7dabc849248635865a867'
-        var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&appid=c56b8c5094d7dabc849248635865a867`
-        //TODO: figure out alert OR just use the current weather...
+        var weatherAPI = 'c56b8c5094d7dabc849248635865a867'
+        var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&appid=${weatherAPI}`
         $.ajax({
             method:"GET",
             url:urlQuery
@@ -199,8 +192,8 @@ $(document).ready(function (){
 
     //Yelp cards
     function buildYelp (yelp) {
+        
         console.log("Building yelp cards") 
-        console.log (yelp) 
         // For loop for yelp data
         yelp.forEach(item => {
             console.log(item)
@@ -209,7 +202,7 @@ $(document).ready(function (){
                 `Price: ${item.price}`,
                 `Rating: ${item.rating}/5`,
                 `Reviewers: ${item.review_count}`,
-                `Adress: ${item.location.adress1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`,
+                `Adress: ${item.location.address1} ${item.location.city} ${item.location.state} ${item.location.zip_code}`,
                 `Phone number: ${item.phone}`,
                 `More info: <a href='${item.url}' target="_blank">Yelp Page</a>`
             ]
@@ -219,9 +212,12 @@ $(document).ready(function (){
                 //create the img element
                 var img = $("<img>")
                 //add the src from our hike loop
-                img.attr("src", item.image_url)
-                //TODO: setting the width/height, remove once css in style fixes
-                // img.css({'width' : '300px' , 'height' : '300px'})
+                //if image doesn't exist use the hard coded generic
+                if(item.image_url){
+                    img.attr("src", item.image_url)
+                }else{
+                    img.attr("src", "https://api.time.com/wp-content/uploads/2018/04/national-beer-day-ipa.jpg?w=800&quality=85")
+                }
                 //create a div for the title of the hike/card
                 var titleSpan = $("<span class='card-title'>")
                 //set the text of the title
@@ -229,7 +225,6 @@ $(document).ready(function (){
             //append the image and the title to the card image div
             cardImgDiv.append(img, titleSpan)
             //create the div for the content
-            //TODO: THis is where we build out maybe a li or more ps for the various items of info
             var contentDiv = $("<div class='card-content'>")
                // loop through our p content array to fill 'er up.
                 pContentArray.forEach(info => {
@@ -255,15 +250,9 @@ $(document).ready(function (){
         $(".beer-results").append(cardDiv)
         })
     }
-    //TODO: buildYelp function
-        //Jquery.each (or standard for, forEach) function passing in array of objects
-            //create div class = card unchecked
-            //create h, p, imgs
-            //set text, src, alt etc.
-            //div.append(h, p, imgs, etc)
-            //result-container-hike.append(div)
 
     function buildHike (hikes) {
+        
         console.log(hikes)
         //for each element(hike) in array hikes
         hikes.forEach(hike => {
@@ -291,9 +280,12 @@ $(document).ready(function (){
                     //create the img element
                     var img = $("<img>")
                     //add the src from our hike loop
+                    //if image doesn't exist use the hard coded generic
+                if(hike.imgMedium){
                     img.attr("src", hike.imgMedium)
-                    //TODO: setting the width/height, remove once css in style fixes
-                    // img.css({'width' : '300px' , 'height' : '300px'})
+                }else{
+                    img.attr("src", "https://www.tnvacation.com/sites/default/files/styles/hero/public/article/_HEADER_PC_jmgriese.jpg")
+                }
                     //create a div for the title of the hike/card
                     var titleSpan = $("<span class='card-title'>")
                     //set the text of the title
@@ -301,7 +293,6 @@ $(document).ready(function (){
                 //append the image and the title to the card image div
                 cardImgDiv.append(img, titleSpan)
                 //create the div for the content
-                //TODO: THis is where we build out maybe a li or more ps for the various items of info
                 var contentDiv = $("<div class='card-content'>")
                     //loop through our p content array to fill 'er up.
                     pContentArray.forEach(info => {
@@ -312,11 +303,6 @@ $(document).ready(function (){
                         //append the p to the contentDiv
                         contentDiv.append(contentP)
                     })
-                    
-                    //fill the p with the hike content summary
-                    // contentP.text(hike.summary)
-                //add the p contents to the contend div container
-                // contentDiv.append(contentP)
                 //create a div to hold hte action button
                 var actionDiv = $("<div class='card-action'>")
                     //TODO this will be where we have a save button
@@ -331,22 +317,6 @@ $(document).ready(function (){
             $(".hiking-results").append(cardDiv)
             
             
-        });
-        
+        });   
     }
-            //TODO: buildYhike function
-        //Jquery.each (or standard for, forEach) function passing in array of objects
-            //create div class = card unchecked hike
-            //create h, p, imgs
-            //set text, src, alt etc.
-            //div.append(h, p, imgs, etc)
-            //result-container-grub.append(div)
-    
-
-    //TODO: updateWather function
-        //takes the weather object and systmatically updates the DOM elements that needs updating
-        //temp, conditions, icon, alerts
-
-
-    
 })
