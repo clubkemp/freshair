@@ -61,6 +61,10 @@ $(document).ready(function (){
             //switch the status object
             cardStatus.hike = 1
             cardStatus.beer = 0
+            //change the active displayed button
+            $(this).addClass('active')
+            //remove the opposite active class 
+            $("#beerBtn").removeClass('active')
             //switch the card hidden class on the card divs
             $("#beer-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
         }
@@ -68,6 +72,10 @@ $(document).ready(function (){
         else if (id === "beerBtn" && cardStatus.beer === 0){
             cardStatus.beer = 1
             cardStatus.hike = 0
+            $(this).addClass('active')
+            // remove the opposite active class 
+            $("#hikeBtn").removeClass('active')
+            //switch the card hidden class on the card divs
             $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
         }
        
