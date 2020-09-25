@@ -88,6 +88,10 @@ main {
     padding-right: 30%;
     background-color: rgba(20, 98, 214, 0.438);
 }
+/* used to get around materialized active class */
+.active{
+    background-color: palevioletred;
+}
 
 /* Placeholder font styling  */
 ::placeholder {
