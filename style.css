@@ -27,19 +27,23 @@ main {
     padding-bottom: 5px;
 }
 
-/* modal styling */
-#wxModal {
-    color: #333;
-    background-color: rgba(192, 201, 201, 0.877);
-}
-
 #advisories-btn {
     margin-top: 3px;
+}
+
+/* modal styling */
+#modalHeader {
+    font-weight: 900;
+    color: rgb(175, 40, 17);
 }
 
 .modal {
     max-height: 100% !important ;
     overflow: visible;
+    color: #333;
+    background-color: rgba(168, 219, 219, 0.877);
+    font-size: 25px;
+    font-weight: bold;
 }
 
 /* main search container styling */
