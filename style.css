@@ -50,6 +50,11 @@ main {
     background-color: rgba(240, 165, 27, 0.959);
 }
 
+/* used to hide the inactive cards */
+.cardHidden{
+    display: none;
+}
+
 #location-input {
     color: white;
     font-size: 20px;
@@ -89,7 +94,6 @@ main {
 #hike-summary {
     font-weight: bold;
 }
-
 .card {
     background-color: rgba(224, 250, 231, 0.822);
 }
@@ -114,5 +118,3 @@ main {
     max-width: 200px;
     margin-top: 5px;
 }
-
-

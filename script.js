@@ -3,6 +3,8 @@ $(document).ready(function (){
     var dist = 10
     //will hold the favorite cards the user clicks on Or maybe just ONE????
     var favorites = { hikes:[], grub:[] }
+    var cardStatus = {hike: 1, beer: 0}
+    //sets term ot the search criteria
     var term = $("#location-input").val();
         //on click of search button
     $("#search-btn").on("click", function (){
@@ -14,6 +16,8 @@ $(document).ready(function (){
         //fire first function in the link
         geoData(term);
     })
+
+    $
     
     //Dropdown button initializer
       $('.dropdown-trigger').dropdown();
@@ -27,7 +31,36 @@ $(document).ready(function (){
         //fire hikingData, yelpData, weatherData pasing the lat/long/dist arguments
 
 
-    //TODO: add listener onto the hike / beer button
+    //adding listener onto the hike / beer button
+    $(".tab-btn").on("click", function(){
+        console.log("clicked!")
+        var id = ($(this).attr("id"))
+        if(id === "hikeBtn" && cardStatus.hike === 0 ){
+            $("#beer-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+        }else if (id === "beerBtn" && cardStatus.beer === 0){
+            $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+        }else{
+            console.log("already Active")
+        }
+
+        // //if the class does not include btnActive
+        // if(!$(this).attr("class").includes('btnActive')){
+        //     //ad the class btnActive and hit the sibling(other button) and remove btn active
+        //     console.log($(this).attr("class"))
+        //     $(this).addClass('btnActive').siblings().removeClass('btnActive')
+        //     //if that button also happens to be the hikeBtn
+        //     if($(this).attr("id") === "hikeBtn"){
+        //         //then add class hidden to beer card container and remove from hike cards container
+        //         
+        //     }else{
+        //         //if it's not hike button, it must be the beer button so do the opposite
+        //         $("#hike-cards").addClass('cardHidden').siblings().removeClass('cardHidden')
+        //     }
+        // }
+        
+
+       
+    })
         //hides and unhides the different card buckets
         //checks to see which one is active
         //on change switch which result-container is hidden
