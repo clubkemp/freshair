@@ -12,8 +12,11 @@ $(document).ready(function (){
     var lat
     var long
     $("#search-btn").on("click", function (){
+        //empty out any old results
         $(".beer-results").empty()
         $(".hiking-results").empty()
+        //default to hiking as active class
+        $("#hikeBtn").addClass("active")
         //get the term the user has searched by
         term = $("#location-input").val();
         //seting the global variable for api calls of radius
