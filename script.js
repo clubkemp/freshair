@@ -8,16 +8,26 @@ $(document).ready(function (){
     //sets term ot the search criteria
     var term = $("#location-input").val();
         //on click of search button
+   
+    var lat
+    var long
     $("#search-btn").on("click", function (){
         $(".beer-results").empty()
         $(".hiking-results").empty()
         //get the term the user has searched by
         term = $("#location-input").val();
         //seting the global variable for api calls of radius
-        //TODO: Need to put in an if statement to only update if the user doesn't enter a search, then we can default to the hard coded 10
+       
         dist = $("#myRange").val();
-        //fire first function in the link
+       // added conditional for grabbing users coordinates
+        if(lat){
+            hikingData(lat, long, dist)
+            yelpData(lat, long, dist)
+            weatherData(lat, long)
+        }
+        else {
         geoData(term);
+        }
     })
 
     //listener that updates the search label on slider change
@@ -25,13 +35,21 @@ $(document).ready(function (){
         $("#range-label").text($(this).val());
     })
     
-    //TODO: add jquery click listener to #currentLocation
-        //this listener skips the geodata() function
-        //navigator.geolocation
-        //GeoLocation.getCurrentPostion
-        //parse geolcation return into lat and long variables
-        //set dist equal to the search value, with if check outlined in our button onclick
-        //fire hikingData, yelpData, weatherData pasing the lat/long/dist arguments
+    //listener on current location button and prompts user to allow or deny
+        $("#currentLocation").on('click', function (){
+     var userLocation = navigator.geolocation.getCurrentPosition(showPosition);
+        
+    // when user accepts for geoloaction, function grabs their lat and long
+        function showPosition(position) {
+            // Grab coordinates from the given object
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+
+            
+           
+          }
+
+        })
 
 
     //adding listener onto the hike / beer button
@@ -85,8 +103,9 @@ $(document).ready(function (){
     //function to hit hiking data take in args from geoData
     function hikingData (lat, long, dist){
         //https://www.hikingproject.com/data
-        //api key for hking projet
+        //api key for hiking project
         var hikingAPI = '200921607-a699ee88fe046c36c0221ff849e49662'
+        // HIKING API KEY = '200922231-f42dcac72820a60fd70fc2690b0d09ea' //
         //search by lat/long using a max distance global var
         var urlQuery = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=${dist}&key=${hikingAPI}`
         //get urlQuery
@@ -112,6 +131,7 @@ $(document).ready(function (){
             meters = 40000
         }
         var yelpAPI = 'qKOC1kAZU2-2x7naO5Epsn00-qErSCTjFvWpQ5ShX-JZ_iyUxKhsS7uGB7A7Tj2dws4OzHLGIJcc8xOScqtHQBVV_5-wtpbgshzys3tHfqKMfXawn014lTTg-9ehXnYx'
+        // YELP API KEY 'ckxrfqlwmXAxoITQyE0VFgrAVTojMarO9jkT-buj7Kufq3kATlZ-cd18uBYQ7AtM8HNqwLLxPs-iSo79Oaj5kZttTSu0YTCllDHsmCzI-ODlaAMwIfSE5ohCBypuX3Yx' //
         //using the cors anywhere hack to get around cros, searching using lat long
         var urlQuery = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=brewery&latitude=${lat}&longitude=${long}&radius=${meters}&sort_by=rating`
         //calling this is a little different since it needs an authorization header
@@ -133,6 +153,7 @@ $(document).ready(function (){
     //function for getting weather data
     function weatherData(lat, long){  
         var weatherAPI = 'c56b8c5094d7dabc849248635865a867'
+        // WEATHER API KEY = '17a9e463090b33048b8d0e143b013660' //
         var urlQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&appid=${weatherAPI}`
         $.ajax({
             method:"GET",
@@ -143,7 +164,6 @@ $(document).ready(function (){
             
             // Weather object to be dynamically generated
             var weatherDetails = {
-                    //TODO: add value if alert exists to send user to external NWS site
                   
                     // Grabs max high temp for the day
                     temperature: response.daily[0].temp.max,
@@ -187,7 +207,7 @@ $(document).ready(function (){
             weatherAdvisories();
 
         })
-        //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
+
     }
 
     //Yelp cards
@@ -238,9 +258,9 @@ $(document).ready(function (){
                 
             // create a div to hold hte action button
             var actionDiv = $("<div class='card-action'>")
-                //TODO this will be where we have a save button
+                
                 var a = $("<a>")
-                //TODO Filler content, needs to be hooked up to save
+                
                 a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
             //add the actions to the actionDiv
             actionDiv.append(a)
@@ -305,9 +325,9 @@ $(document).ready(function (){
                     })
                 //create a div to hold hte action button
                 var actionDiv = $("<div class='card-action'>")
-                    //TODO this will be where we have a save button
+                    
                     var a = $("<a>")
-                    //TODO Filler content, needs to be hooked up to save
+                    
                     a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
                 //add the actions to the actionDiv
                 actionDiv.append(a)
