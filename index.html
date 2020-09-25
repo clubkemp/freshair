@@ -12,120 +12,114 @@
 </head>
 
 <body>
-
-    <nav class="nav-extended">
-        <div class="row nav-wrapper">
-            <div class="col s5">
-                <img src="images/LogoName.png" class="brand-logo left">
-            </div>
-            <div class="col s7 advisories-box">
-                <!-- <a class="waves-effect waves-light btn-small red right" id="advisories-btn"><i class="tiny material-icons">cloud</i>Advisories</a> -->
-                <a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#wxModal" id="advisories-btn"><i
-                        class="material-icons">filter_drama</i></a>
-            </div>
-        </div>
-        <div id="wxModal" class="modal">
-            <div class="modal-content">
-              <h4 id="modalHeader"></h4>
-              <p id="temperature"></p>
-              <p id="conditions"></p>
-              <img id="currentConditionIcon" alt="current weather icon image">
-              <p id="current-alert"></p>
-              <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat"></a>
-              </div>
-            </div>
-        </div>
-    </nav>
-
-   
-    <div class="row" id="searchBar">
-        <!-- Search Input -->
-        <div class="col s6 m4">
-            <input type="text" id="location-input" placeholder="Enter Location" class="location-search" />
-        </div>
-
-
-        <!-- Current Location -->
-        <div class="col s6 m2">
-            <button class="btn waves-effect waves-light" type="submit" name="action" id="currentLocation">Current
-                Location</button>
-        </div>
-    
-    
-        <!-- Radius Dropdown Trigger -->
-        <div class="col s8 m4 left">
-
-            <!-- <div class="slidecontainer">
-                <input type="range" min="1" max="50" value="10" class="slider" id="myRange">
-              </div>
-            -->
-            <form action="#">
-                <p class="range-field">
-                  <input type="range" id="myRange" min="0" max="50" />
-                </p>
-              </form>
-            <!-- <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Search radius</a> -->
-
-            <!-- Radius Dropdown Structure -->
-            <!-- <ul id='dropdown1' class='dropdown-content'>
-                <li><a href="#!" id="2M">2 Miles</a></li>
-                <li><a href="#!" id="5M">5 Miles</a></li>
-                <li><a href="#!" id="10M">10 Miles</a></li>
-                <li><a href="#!" id="15M">15 Miles</a></li>
-            </ul> -->
-        </div>
-
-        <!-- Search Button -->
-        <div class="col s2 m2 left">
-            <button class="btn waves-effect waves-light" type="submit" name="action" id="search-btn">Search</button>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col s6 center">
-            <!-- <div class="search-type"> -->
-                <!-- Hike Selector -->
-                <!-- <div class="button-group center" role="group" aria-label="..."> -->
-                <button class="btn waves-effect waves-dark" type="submit" name="action" id="hikeBtn">
-                    Hike</button>
-                <!-- </div> -->
-            <!-- </div> -->
-
-        </div>
-        <div class="col s6 center">
-            <!-- Beer Selector -->
-            <button class="btn waves-effect waves-dark" type="submit" name="action" id="beenBtn">
-                Beer</button>
-
-
-        </div>
-    </div>
-    </div>
-
-    <div class="row result-container">
-        <div class="col s12">
-            <div class="row">
-                <div id="hike-cards" class="col s12 m7 hiking-results">
-                  <!-- Hiking cards dynamically created here -->
+    <header>
+        <div class="navbar-fixed">
+            <nav class="nav-extended">
+                <div class="row nav-wrapper">
+                    <div class="col s5">
+                        <img src="images/LogoName.png" class="brand-logo left">
+                    </div>
+                    <div class="col s7 advisories-box">
+                        <!-- <a class="waves-effect waves-light btn-small red right" id="advisories-btn"><i class="tiny material-icons">cloud</i>Advisories</a> -->
+                        <a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#wxModal" id="advisories-btn"><i
+                                class="material-icons">filter_drama</i></a>
+                    </div>
                 </div>
-                <div id ="beer-cards" class="col s12 m7 beer-results cardHidden">
-                    <!-- beer cards dynamically created here -->
-                  </div>
+                <div id="wxModal" class="modal">
+                    <div class="modal-content">
+                    <h4 id="modalHeader"></h4>
+                    <p id="temperature"></p>
+                    <p id="conditions"></p>
+                    <img id="currentConditionIcon" alt="current weather icon image">
+                    <p id="current-alert"></p>
+                    <!-- <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat"></a>
+                    </div> -->
+                    </div>
+                </div>
+            </nav>
+        </div>
+    
+        
+        <div class="row" id="searchBar">
+            <!-- Search Input -->
+            <div class="col s6 m4">
+                <input type="text" id="location-input" placeholder="Enter Location or use Current Location" class="location-search" />
+            </div>
+
+
+            <!-- Current Location -->
+            <div class="col s6 m2">
+                <button class="btn waves-effect waves-light" type="submit" name="action" id="currentLocation"><i class="material-icons">gps_fixed</i></button>
+            </div>
+        
+        
+            <!-- Radius Slider -->
+            <div class="col s8 m4 left">
+
+                <form action="#">
+                    <p class="range-field">
+                    <input type="range" id="myRange" min="0" max="50" />
+                    </p>
+                </form>
+            
+            </div>
+
+            <!-- Search Button -->
+            <div class="col s2 m2 left">
+                <button class="btn waves-effect waves-light" type="submit" name="action" id="search-btn">Search</button>
             </div>
         </div>
-    </div>
-    <!-- Dynamically generate cards -->
-    </div>
+
+        <div class="row tab-container">
+            <div class="col s6 center">
+                <!-- <div class="search-type"> -->
+                    <!-- Hike Selector -->
+                    <!-- <div class="button-group center" role="group" aria-label="..."> -->
+                    <button class="btn waves-effect waves-dark tab-btn" type="submit" name="action" id="hikeBtn">
+                        Hike</button>
+                    <!-- </div> -->
+                <!-- </div> -->
+
+            </div>
+            <div class="col s6 center">
+                <!-- Beer Selector -->
+                <button class="btn waves-effect waves-dark tab-btn" type="submit" name="action" id="beenBtn">
+                    Beer</button>
 
 
-    <div class="container-card">
+            </div>
+        </div>
+    </header>
 
-    </div>
+    <main>
+        <div class="row result-container">
+            <div class="col s12">
+                <div class="row">
+                    <div id="hike-cards" class="col s12 m7 hiking-results">
+                    <!-- Hiking cards dynamically created here -->
+                    </div>
+                    <div id ="beer-cards" class="col s12 m7 beer-results cardHidden">
+                        <!-- beer cards dynamically created here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dynamically generate cards -->
 
-    <div class="navbar-bottom">
-        <!-- Maybe -->
-    </div>
+        <div class="container-card">
+
+        </div>
+    </main>
+
+    <!-- Fixed Footer -->
+    <footer class="page-footer">
+        <div class="row">
+            <div class="col 12 s12 center">
+                <img src="images/LogoName.png" id="footer-logo">
+            </div>
+        </div>
+    </footer>
 
     <!-- Throw this link in when the time comes -->
     <!-- <a href="https://map.snapchat.com/"<span id="lat">@47.662183</span>,-122.417472,14.19z">check the state of Snaps</a> -->
