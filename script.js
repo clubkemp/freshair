@@ -8,24 +8,26 @@ $(document).ready(function (){
     //sets term ot the search criteria
     var term = $("#location-input").val();
         //on click of search button
-    //TODO: declare global lat long vars
-    // var lat
-    // var long
+   
+    var lat
+    var long
     $("#search-btn").on("click", function (){
         $(".beer-results").empty()
         $(".hiking-results").empty()
         //get the term the user has searched by
         term = $("#location-input").val();
         //seting the global variable for api calls of radius
-        //TODO: Need to put in an if statement to only update if the user doesn't enter a search, then we can default to the hard coded 10
+       
         dist = $("#myRange").val();
-        //fire first function in the link
-        // if(lat &&){
-        //     hikingData(lat, long, dist)
-        //     yelpData(lat, long, dist)
-        //     weatherData(lat, long)
-        // }
+       // added conditional for grabbing users coordinates
+        if(lat){
+            hikingData(lat, long, dist)
+            yelpData(lat, long, dist)
+            weatherData(lat, long)
+        }
+        else {
         geoData(term);
+        }
     })
 
     //listener that updates the search label on slider change
@@ -33,17 +35,21 @@ $(document).ready(function (){
         $("#range-label").text($(this).val());
     })
     
-    //TODO: add jquery click listener to #currentLocation
-        // code code code
-        // lat = code that gives lat
-        // long = 
+    //listener on current location button and prompts user to allow or deny
+        $("#currentLocation").on('click', function (){
+     var userLocation = navigator.geolocation.getCurrentPosition(showPosition);
+        
+    // when user accepts for geoloaction, function grabs their lat and long
+        function showPosition(position) {
+            // Grab coordinates from the given object
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
 
-        //this listener skips the geodata() function
-        //navigator.geolocation
-        //GeoLocation.getCurrentPostion
-        //parse geolcation return into lat and long variables
-        //set dist equal to the search value, with if check outlined in our button onclick
-        //fire hikingData, yelpData, weatherData pasing the lat/long/dist arguments
+            
+           
+          }
+
+        })
 
 
     //adding listener onto the hike / beer button
@@ -155,7 +161,6 @@ $(document).ready(function (){
             
             // Weather object to be dynamically generated
             var weatherDetails = {
-                    //TODO: add value if alert exists to send user to external NWS site
                   
                     // Grabs max high temp for the day
                     temperature: response.daily[0].temp.max,
@@ -199,7 +204,7 @@ $(document).ready(function (){
             weatherAdvisories();
 
         })
-        //TODO: Fire the function to build fill in our weather info with weather object as argument keys to match ids of DOM/MODAL elements
+
     }
 
     //Yelp cards
@@ -250,9 +255,9 @@ $(document).ready(function (){
                 
             // create a div to hold hte action button
             var actionDiv = $("<div class='card-action'>")
-                //TODO this will be where we have a save button
+                
                 var a = $("<a>")
-                //TODO Filler content, needs to be hooked up to save
+                
                 a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
             //add the actions to the actionDiv
             actionDiv.append(a)
@@ -317,9 +322,9 @@ $(document).ready(function (){
                     })
                 //create a div to hold hte action button
                 var actionDiv = $("<div class='card-action'>")
-                    //TODO this will be where we have a save button
+                    
                     var a = $("<a>")
-                    //TODO Filler content, needs to be hooked up to save
+                    
                     a.attr("href", "https://www.hikingproject.com/trail/7089027/pioneer-park")
                 //add the actions to the actionDiv
                 actionDiv.append(a)
