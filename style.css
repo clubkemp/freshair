@@ -92,6 +92,9 @@ main {
 .active{
     background-color: palevioletred;
 }
+.card-container{
+    justify-content: center;
+}
 
 /* Placeholder font styling  */
 ::placeholder {
