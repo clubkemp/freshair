@@ -1,6 +1,6 @@
 #Project 1: FreshAir
 
-link: https://github.com/clubkemp/freshair
+link: [Freshair](https://clubkemp.github.io/freshair/)
 
 
 ## Target User profile:
